@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+
+  /* body {
+    @apply bg-slate-800;
+  } */
+    
+  .header {
+    @apply flex flex-col lg:flex-row p-3 space-x-5 items-center place-content-evenly fixed z-50 w-screen;
+  }
+
+    .link-navegacion {
+      @apply text-2xl text-white tracking-wider mr-3 font-semibold hover:border-b-2 hover:border-amber-300;
+    }
+
+    .link-navegacion a {
+      @apply md:max-w-max;
+    }
+
+    .bg-sup{
+        background: url('../img/programacion.jpg');
+        @apply h-screen bg-cover bg-no-repeat;
+    }
+
+    .seccion-inicio {
+      @apply h-screen flex items-center justify-center;
+    }
+
+    .span-sup {
+      @apply text-white text-5xl font-bold -mt-52;
+    }
+
+    .portafolio {
+      @apply h-fit container mx-auto;
+    }
+
+    .titulo-portafolio {
+      @apply text-5xl mx-12 my-10 font-medium text-slate-800;
+    }
+
+    .proyectos {
+      @apply grid gap-10;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr) );
+    }
+
+    .proyecto {
+      @apply shadow-2xl w-96 m-2 rounded-md mx-auto cursor-pointer transition-transform hover:transform hover:scale-105 relative;
+    }
+
+    .proyecto h3,
+    .proyecto h4 {
+      @apply text-slate-800;
+    }
+
+    .imagen-proyecto {
+      @apply w-96 h-60 bg-cover rounded-tl-md rounded-tr-md mix-blend-overlay;
+    }
+
+    .overlay-proyecto {
+      @apply relative flex place-content-center items-center hover:bg-black hover:bg-opacity-60 transition duration-500 rounded-tl-md rounded-tr-md overflow-hidden;
+    }
+
+    .links-proyecto {
+      @apply absolute sm:flex;
+    }
+
+    .option {
+      @apply flex mx-5 mb-5 sm:mb-0 rounded-md p-3 shadow-2xl bg-slate-900 hover:bg-slate-700 text-slate-50;
+    }
+
+    .option img {
+      @apply w-5 h-5 mx-1 p-0;
+    }
+
+    .parrafo-proyecto {
+      @apply mx-3 p-3;
+    }
+
+    .imagenes-lenguajes {
+      @apply flex place-content-center m-5;
+    }
+
+    .imagenes-lenguajes img {
+      @apply w-20;
+    }
+
+    .proyecto h3, .proyecto h4 {
+      @apply mx-4 p-3 font-semibold;
+    }
+
+    .sobre-mi {
+      background-image: url('../img/programacion-2.jpg');
+      @apply h-fit p-5 my-20 bg-cover bg-no-repeat;
+    }
+
+    .titulo-sobre-mi {
+      @apply text-2xl font-semibold mx-20 text-white;
+    }
+
+    .mi-persona {
+      @apply mx-auto;
+    }
+
+    .mi-persona h4 {
+      @apply text-center text-6xl font-semibold;
+    }
+
+    .mi-persona img {
+      @apply my-5;
+    }
+
+    .mi-persona h4 {
+      @apply text-2xl font-semibold text-white;
+    }
+
+    .informacion-sobre-mi h4 {
+      @apply text-2xl font-semibold text-white my-2;
+    }
+
+    .informacion-sobre-mi p {
+      @apply text-white;
+    }
+
+
+    .contacto {
+      @apply h-fit container mx-auto;
+    }
+
+}
