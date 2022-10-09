@@ -22,7 +22,7 @@
     }
 
     .bg-sup{
-        background: url('../img/programacion.jpg');
+        background: url('../img/programacion-2.jpg');
         @apply h-screen bg-cover bg-no-repeat;
     }
 
@@ -31,7 +31,7 @@
     }
 
     .span-sup {
-      @apply text-white text-5xl font-bold -mt-52;
+      @apply text-white text-3xl sm:text-5xl font-bold -mt-52 text-center;
     }
 
     .portafolio {
@@ -39,7 +39,7 @@
     }
 
     .titulo-portafolio {
-      @apply text-5xl mx-12 my-10 font-medium text-slate-800;
+      @apply text-5xl lg:mx-12 my-10 font-medium text-slate-800;
     }
 
     .proyectos {
@@ -48,7 +48,7 @@
     }
 
     .proyecto {
-      @apply shadow-2xl w-96 m-2 rounded-md mx-auto cursor-pointer transition-transform hover:transform hover:scale-105 relative;
+      @apply shadow-2xl w-64 sm:w-96 m-2 rounded-md mx-auto cursor-pointer transition-transform hover:transform hover:scale-105 relative;
     }
 
     .proyecto h3,
@@ -57,7 +57,7 @@
     }
 
     .imagen-proyecto {
-      @apply w-96 h-60 bg-cover rounded-tl-md rounded-tr-md mix-blend-overlay;
+      @apply w-full md:w-96 h-60 bg-cover rounded-tl-md rounded-tr-md mix-blend-overlay;
     }
 
     .overlay-proyecto {
@@ -85,7 +85,7 @@
     }
 
     .imagenes-lenguajes img {
-      @apply w-20;
+      @apply w-10 sm:w-20;
     }
 
     .proyecto h3, .proyecto h4 {
@@ -93,41 +93,108 @@
     }
 
     .sobre-mi {
-      background-image: url('../img/programacion-2.jpg');
-      @apply h-fit p-5 my-20 bg-cover bg-no-repeat;
+      @apply h-fit;
+    }
+
+    .contenedor-sobre-mi {
+      @apply lg:flex w-full h-full;
     }
 
     .titulo-sobre-mi {
-      @apply text-2xl font-semibold mx-20 text-white;
+      @apply text-5xl font-bold mx-20 text-white;
     }
 
     .mi-persona {
-      @apply mx-auto;
+      @apply bg-slate-900 p-5 lg:w-fit mx-auto flex place-content-center items-center;
+    }
+
+    .mi-persona h3 {
+      @apply text-center text-4xl font-bold text-slate-100;
     }
 
     .mi-persona h4 {
-      @apply text-center text-6xl font-semibold;
+      @apply text-center text-lg font-bold text-slate-300;
     }
 
     .mi-persona img {
       @apply my-5;
     }
 
-    .mi-persona h4 {
-      @apply text-2xl font-semibold text-white;
+    .informacion-sobre-mi {
+      @apply border w-fit p-5 bg-slate-100;
     }
 
     .informacion-sobre-mi h4 {
-      @apply text-2xl font-semibold text-white my-2;
+      @apply text-3xl font-bold text-slate-900 my-2;
+    }
+
+    .informacion-sobre-mi h4:nth-child(n+2) {
+      @apply text-center my-5;
     }
 
     .informacion-sobre-mi p {
-      @apply text-white;
+      @apply text-gray-800;
     }
 
+    .tecnologias {
+      @apply flex flex-wrap place-content-center;
+    }
+
+    .tecnologia {
+      @apply mx-2 my-5 p-5 shadow-xl rounded-lg;
+    }
+
+    .tecnologia h3 {
+      @apply text-slate-900 font-bold my-5;
+    }
+
+    .tecnologia img {
+      @apply mx-auto;
+    }
 
     .contacto {
-      @apply h-fit container mx-auto;
+      background-image: url("../img/programacion.jpg");
+      @apply h-screen w-full bg-cover m-0 flex items-center place-content-center relative;
+    }
+
+    .formulario-contacto {
+      @apply p-10 bg-slate-50 w-96 lg:w-fit my-10 rounded-sm relative;
+    }
+
+    .formulario-contacto h3 {
+      @apply text-2xl font-semibold text-center text-neutral-900 mb-5;
+    }
+
+    .formulario-contacto input {
+      @apply w-full my-5 border-2 lg:mr-5 focus:border-slate-700 outline-none text-gray-600 p-2 block;
+    }
+
+    .formulario-contacto textarea {
+      @apply my-5 border-2 w-full h-40 focus:border-slate-700 outline-none text-gray-600 px-2;
+    }
+
+    .formulario-contacto input[type="submit"] {
+      @apply block h-10 w-fit rounded-md bg-slate-800 text-slate-100 hover:cursor-pointer hover:bg-slate-700 lg:absolute lg:-bottom-2 lg:right-5;
+    }
+
+    .message {
+      @apply h-20 w-20 absolute border bg-gray-100 rounded-full p-5 z-10;
+    }
+
+    @media (min-width: 1024px) {
+      .message {
+        margin-top: -26rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .message {
+        margin-top: -35rem;
+      }
+    }
+
+    .message img {
+      @apply w-fit h-fit bg-cover;
     }
 
 }

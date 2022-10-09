@@ -172,11 +172,14 @@
         
         <h3 class="titulo-sobre-mi">Sobre mi</h3>
 
-        <div class="lg:grid lg:grid-cols-2">
+        <div class="contenedor-sobre-mi">
             <div class="mi-persona">
             
-                <h4>Kevin Sarria</h4>
-                <img src="../img/programmer.png" alt="">
+                <div>
+                    <h3>Kevin Sarria</h3>
+                    <h4>Desarrollador Web jr.</h4>
+                    <img src="../img/programmer.png" alt="">
+                </div>
     
             </div>
     
@@ -189,42 +192,42 @@
 
                     <div class="tecnologia">
                         <h3>HTML5</h3>
-                        <img src="" alt="">
+                        <img src="../img/html-5.png" alt="Logo HTML5">
                     </div>
 
                     <div class="tecnologia">
                         <h3>CSS3</h3>
-                        <img src="" alt="">
+                        <img src="../img/css-3.png" alt="Logo CSS3">
                     </div>
 
                     <div class="tecnologia">
                         <h3>JAVASCRIPT</h3>
-                        <img src="" alt="">
+                        <img src="../img/js.png" alt="Logo JavaScript">
                     </div>
 
                     <div class="tecnologia">
                         <h3>SASS</h3>
-                        <img src="" alt="">
+                        <img src="../img/sass_icon.png" alt="Logo SASS">
                     </div>
 
                     <div class="tecnologia">
                         <h3>TAILWIND</h3>
-                        <img src="" alt="">
+                        <img src="../img/tailwind-css-icon.png" alt="Logo Tailwimd CSS">
                     </div>
 
                     <div class="tecnologia">
                         <h3>MYSQL</h3>
-                        <img src="" alt="">
+                        <img src="../img/mysql.png" alt="Logo MySQL">
                     </div>
 
                     <div class="tecnologia">
                         <h3>PHP</h3>
-                        <img src="" alt="">
+                        <img src="../img/php.png" alt="Logo PHP">
                     </div>
 
                     <div class="tecnologia">
                         <h3>GIT</h3>
-                        <img src="" alt="">
+                        <img src="../img/Git-Icon.png" alt="Logo GIT">
                     </div>
 
                 </div>
@@ -237,25 +240,32 @@
 
     <section class="contacto">
 
-        <div class="contenedor-formulario">
-
-            <h3>Contactame!!!</h3>
-
-            <form class="formulario-contacto">
-            
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre">
-    
-                <label for="email">Correo Electronico</label>
-                <input type="email" name="email" id="email">
-    
-                <label for="asunto">Mensaje</label>
-                <textarea name="asunto" id="asunto"></textarea>
-    
-            </form>
-
+        
+        <div class="message">
+            <img src="../img/message.png" alt="Icono Mensaje">
         </div>
+        
 
+        <form class="formulario-contacto">
+
+            <h3>Contactame Aquí!</h3>
+
+            <div class="lg:grid lg:grid-cols-2 lg:gap-5">
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+
+                <input type="email" name="email" id="email" placeholder="Tu email">
+            </div>
+
+            <textarea name="asunto" id="asunto" placeholder="Escribe tu mensaje aqui"></textarea>
+
+            <input type="submit" value="Enviar">
+
+        </form>
+        
+
+        
+
+        
         
 
     </section>
