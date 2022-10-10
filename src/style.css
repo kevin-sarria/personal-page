@@ -99,7 +99,7 @@
 
   .proyecto h3,
   .proyecto h4 {
-    @apply text-slate-800;
+    @apply text-slate-800 font-bold text-xl;
   }
 
   .imagen-proyecto {
@@ -111,7 +111,11 @@
   }
 
   .links-proyecto {
-    @apply absolute sm:flex;
+    @apply absolute sm:flex opacity-0;
+  }
+
+  .overlay-activo {
+    @apply opacity-100 duration-700;
   }
 
   .option {
@@ -131,7 +135,7 @@
   }
 
   .imagenes-lenguajes img {
-    @apply w-10 sm:w-20;
+    @apply w-12 sm:w-14;
   }
 
   .proyecto h3,

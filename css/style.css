@@ -848,6 +848,9 @@ html {
 
 .proyecto h3, 
   .proyecto h4 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
 }
@@ -889,12 +892,18 @@ html {
 
 .links-proyecto {
   position: absolute;
+  opacity: 0;
 }
 
 @media (min-width: 640px) {
   .links-proyecto {
     display: flex;
   }
+}
+
+.overlay-activo {
+  opacity: 1;
+  transition-duration: 700ms;
 }
 
 .option {
@@ -945,12 +954,12 @@ html {
 }
 
 .imagenes-lenguajes img {
-  width: 2.5rem;
+  width: 3rem;
 }
 
 @media (min-width: 640px) {
   .imagenes-lenguajes img {
-    width: 5rem;
+    width: 3.5rem;
   }
 }
 
