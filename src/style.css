@@ -5,196 +5,243 @@
 
 @layer components {
 
-  /* body {
-    @apply bg-slate-800;
-  } */
-    
-  .header {
-    @apply flex flex-col lg:flex-row p-3 space-x-5 items-center place-content-evenly fixed z-50 w-screen;
+  html {
+    scroll-behavior: smooth;
   }
 
-    .link-navegacion {
-      @apply text-2xl text-white tracking-wider mr-3 font-semibold hover:border-b-2 hover:border-amber-300;
-    }
+  .header {
+    @apply flex flex-col sm:flex-row p-3 space-x-5 items-center place-content-evenly fixed w-screen z-20;
+  }
 
-    .link-navegacion a {
-      @apply md:max-w-max;
-    }
+  .logo {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-white;
+  }
 
-    .bg-sup{
-        background: url('../img/programacion-2.jpg');
-        @apply h-screen bg-cover bg-no-repeat;
-    }
+  .navegacion {
+    @apply lg:ml-3 hidden lg:inline-block z-20;
+  }
 
-    .seccion-inicio {
-      @apply h-screen flex items-center justify-center;
-    }
+  .active-menu {
+    @apply -ml-3 w-screen h-screen flex flex-col place-content-center items-center bg-slate-900 absolute top-0 left-0 z-30 transition-all transform duration-75;
+    transform: translateX(-1.2rem);
 
-    .span-sup {
-      @apply text-white text-3xl sm:text-5xl font-bold -mt-52 text-center;
-    }
+  }
 
-    .portafolio {
-      @apply h-fit container mx-auto;
-    }
+  .active-menu a {
+    @apply my-8;
+  }
 
-    .titulo-portafolio {
-      @apply text-5xl lg:mx-12 my-10 font-medium text-slate-800;
-    }
+  .menu-burger {
+    @apply mt-4 sm:mt-0 lg:hidden z-30;
+  }
 
-    .proyectos {
-      @apply grid gap-10;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr) );
-    }
+  .active .line:nth-child(1) {
+    @apply transform duration-300 rotate-45 translate-x-1 translate-y-1.5 z-30;
+  }
 
-    .proyecto {
-      @apply shadow-2xl w-64 sm:w-96 m-2 rounded-md mx-auto cursor-pointer transition-transform hover:transform hover:scale-105 relative;
-    }
+  .active .line:nth-child(2) {
+    @apply hidden z-30;
+  }
 
-    .proyecto h3,
-    .proyecto h4 {
-      @apply text-slate-800;
-    }
+  .active .line:nth-child(3) {
+    @apply transform duration-300 -rotate-45 translate-x-1 -translate-y-1.5 z-30;
+  }
 
-    .imagen-proyecto {
-      @apply w-full md:w-96 h-60 bg-cover rounded-tl-md rounded-tr-md mix-blend-overlay;
-    }
+  .line {
+    @apply w-10 h-0.5 bg-white;
+  }
 
-    .overlay-proyecto {
-      @apply relative flex place-content-center items-center hover:bg-black hover:bg-opacity-60 transition duration-500 rounded-tl-md rounded-tr-md overflow-hidden;
-    }
+  .line:nth-child(2) {
+    @apply mt-2;
+  }
 
-    .links-proyecto {
-      @apply absolute sm:flex;
-    }
+  .line:nth-child(3) {
+    @apply mt-2;
+  }
 
-    .option {
-      @apply flex mx-5 mb-5 sm:mb-0 rounded-md p-3 shadow-2xl bg-slate-900 hover:bg-slate-700 text-slate-50;
-    }
+  .link-navegacion {
+    @apply text-2xl text-white tracking-wider mr-3 font-semibold hover:border-b-2 hover:border-amber-300;
+  }
 
-    .option img {
-      @apply w-5 h-5 mx-1 p-0;
-    }
+  .link-navegacion a {
+    @apply md:max-w-max;
+  }
 
-    .parrafo-proyecto {
-      @apply mx-3 p-3;
-    }
+  .bg-sup {
+    background: url('../img/programacion-2.jpg');
+    @apply h-screen bg-cover bg-no-repeat;
+  }
 
-    .imagenes-lenguajes {
-      @apply flex place-content-center m-5;
-    }
+  .seccion-inicio {
+    @apply h-screen flex items-center justify-center;
+  }
 
-    .imagenes-lenguajes img {
-      @apply w-10 sm:w-20;
-    }
+  .span-sup {
+    @apply text-white text-3xl sm:text-5xl font-bold -mt-52 text-center;
+  }
 
-    .proyecto h3, .proyecto h4 {
-      @apply mx-4 p-3 font-semibold;
-    }
+  .portafolio {
+    @apply h-fit container mx-auto;
+  }
 
-    .sobre-mi {
-      @apply h-fit;
-    }
+  .titulo-portafolio {
+    @apply text-5xl lg:mx-12 my-10 font-medium text-slate-800;
+  }
 
-    .contenedor-sobre-mi {
-      @apply lg:flex w-full h-full;
-    }
+  .proyectos {
+    @apply grid gap-10 my-10;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+  }
 
-    .titulo-sobre-mi {
-      @apply text-5xl font-bold mx-20 text-white;
-    }
+  .proyecto {
+    @apply shadow-2xl w-64 sm:w-96 m-2 rounded-md mx-auto cursor-pointer transition-transform hover:transform hover:scale-105 relative;
+  }
 
-    .mi-persona {
-      @apply bg-slate-900 p-5 lg:w-fit mx-auto flex place-content-center items-center;
-    }
+  .proyecto h3,
+  .proyecto h4 {
+    @apply text-slate-800;
+  }
 
-    .mi-persona h3 {
-      @apply text-center text-4xl font-bold text-slate-100;
-    }
+  .imagen-proyecto {
+    @apply w-full md:w-96 h-60 bg-cover rounded-tl-md rounded-tr-md mix-blend-overlay;
+  }
 
-    .mi-persona h4 {
-      @apply text-center text-lg font-bold text-slate-300;
-    }
+  .overlay-proyecto {
+    @apply relative flex place-content-center items-center hover:bg-black hover:bg-opacity-60 transition duration-500 rounded-tl-md rounded-tr-md overflow-hidden;
+  }
 
-    .mi-persona img {
-      @apply my-5;
-    }
+  .links-proyecto {
+    @apply absolute sm:flex;
+  }
 
-    .informacion-sobre-mi {
-      @apply border w-fit p-5 bg-slate-100;
-    }
+  .option {
+    @apply flex mx-5 mb-5 sm:mb-0 rounded-md p-3 shadow-2xl bg-slate-900 hover:bg-slate-700 text-slate-50;
+  }
 
-    .informacion-sobre-mi h4 {
-      @apply text-3xl font-bold text-slate-900 my-2;
-    }
+  .option img {
+    @apply w-5 h-5 mx-1 p-0;
+  }
 
-    .informacion-sobre-mi h4:nth-child(n+2) {
-      @apply text-center my-5;
-    }
+  .parrafo-proyecto {
+    @apply mx-3 p-3;
+  }
 
-    .informacion-sobre-mi p {
-      @apply text-gray-800;
-    }
+  .imagenes-lenguajes {
+    @apply flex place-content-center m-5;
+  }
 
-    .tecnologias {
-      @apply flex flex-wrap place-content-center;
-    }
+  .imagenes-lenguajes img {
+    @apply w-10 sm:w-20;
+  }
 
-    .tecnologia {
-      @apply mx-2 my-5 p-5 shadow-xl rounded-lg;
-    }
+  .proyecto h3,
+  .proyecto h4 {
+    @apply mx-4 p-3 font-semibold;
+  }
 
-    .tecnologia h3 {
-      @apply text-slate-900 font-bold my-5;
-    }
+  .sobre-mi {
+    @apply h-fit;
+  }
 
-    .tecnologia img {
-      @apply mx-auto;
-    }
+  .contenedor-sobre-mi {
+    @apply lg:flex w-full h-full;
+  }
 
-    .contacto {
-      background-image: url("../img/programacion.jpg");
-      @apply h-screen w-full bg-cover m-0 flex items-center place-content-center relative;
-    }
+  .mi-persona {
+    @apply bg-slate-900 p-5 lg:w-fit mx-auto flex place-content-center items-center;
+  }
 
-    .formulario-contacto {
-      @apply p-10 bg-slate-50 w-96 lg:w-fit my-10 rounded-sm relative;
-    }
+  .mi-persona h3 {
+    @apply text-center text-4xl font-bold text-slate-100;
+  }
 
-    .formulario-contacto h3 {
-      @apply text-2xl font-semibold text-center text-neutral-900 mb-5;
-    }
+  .mi-persona h4 {
+    @apply text-center text-lg font-bold text-slate-300;
+  }
 
-    .formulario-contacto input {
-      @apply w-full my-5 border-2 lg:mr-5 focus:border-slate-700 outline-none text-gray-600 p-2 block;
-    }
+  .mi-persona img {
+    @apply my-5;
+  }
 
-    .formulario-contacto textarea {
-      @apply my-5 border-2 w-full h-40 focus:border-slate-700 outline-none text-gray-600 px-2;
-    }
+  .informacion-sobre-mi {
+    @apply border w-fit p-5 bg-slate-100;
+  }
 
-    .formulario-contacto input[type="submit"] {
-      @apply block h-10 w-fit rounded-md bg-slate-800 text-slate-100 hover:cursor-pointer hover:bg-slate-700 lg:absolute lg:-bottom-2 lg:right-5;
-    }
+  .informacion-sobre-mi h4 {
+    @apply text-4xl font-bold text-slate-900 my-2;
+  }
 
+  .informacion-sobre-mi h4:nth-child(n+2) {
+    @apply text-3xl text-center my-5;
+  }
+
+  .informacion-sobre-mi p {
+    @apply text-gray-800;
+  }
+
+  .tecnologias {
+    @apply flex flex-wrap place-content-center;
+  }
+
+  .tecnologia {
+    @apply mx-2 my-5 p-5 shadow-xl rounded-lg;
+  }
+
+  .tecnologia h3 {
+    @apply text-slate-900 font-bold my-5;
+  }
+
+  .tecnologia img {
+    @apply mx-auto;
+  }
+
+  .contacto {
+    background-image: url("../img/programacion.jpg");
+    @apply h-screen w-full bg-cover m-0 flex items-center place-content-center relative;
+  }
+
+  .formulario-contacto {
+    @apply p-10 bg-slate-50 w-96 lg:w-fit my-10 rounded-sm relative;
+  }
+
+  .formulario-contacto h3 {
+    @apply text-2xl font-semibold text-center text-neutral-900 mb-5;
+  }
+
+  .formulario-contacto input {
+    @apply w-full my-5 border-2 lg:mr-5 focus:border-slate-700 outline-none text-gray-600 p-2 block;
+  }
+
+  .formulario-contacto textarea {
+    @apply my-5 border-2 w-full h-40 focus:border-slate-700 outline-none text-gray-600 px-2;
+  }
+
+  .formulario-contacto input[type="submit"] {
+    @apply block h-10 w-fit rounded-md bg-slate-800 text-slate-100 hover:cursor-pointer hover:bg-slate-700 lg:absolute lg:-bottom-2 lg:right-5;
+  }
+
+  .message {
+    @apply h-20 w-20 absolute border bg-gray-100 rounded-full p-5 z-10;
+  }
+
+  @media (min-width: 1024px) {
     .message {
-      @apply h-20 w-20 absolute border bg-gray-100 rounded-full p-5 z-10;
+      margin-top: -26rem;
     }
+  }
 
-    @media (min-width: 1024px) {
-      .message {
-        margin-top: -26rem;
-      }
+  @media (max-width: 1023px) {
+    .message {
+      margin-top: -35rem;
     }
+  }
 
-    @media (max-width: 1023px) {
-      .message {
-        margin-top: -35rem;
-      }
-    }
+  .message img {
+    @apply w-fit h-fit bg-cover;
+  }
 
-    .message img {
-      @apply w-fit h-fit bg-cover;
-    }
+  .boton-volver-arriba {
+    @apply hidden w-fit h-fit p-3 border-green-600 border-2 rounded-full bg-green-500 bottom-10 right-10 fixed hover:scale-125 hover:bg-green-400 duration-150;
+  }
 
 }

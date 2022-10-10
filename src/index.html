@@ -8,25 +8,32 @@
     <script src="header.js"></script>
     <title>Kevin Sarria</title>
 </head>
-<body>
+<body class="relative">
     
     <header class="header">
         
-        <div class="text-5xl font-bold text-white">
-            SarriaDEV
+        <div class="logo">
+            <a href="#inicio">SarriaDEV</a>
         </div>
         
-        <nav class="ml-3">
-            <a href="#" class="link-navegacion">Portafolio</a>
-            <a href="#" class="link-navegacion">Sobre Mi</a>
-            <a href="#" class="link-navegacion">Contacto</a>
+        <nav class="navegacion">
+            <a href="#inicio" class="link-navegacion">Inicio</a>
+            <a href="#portafolio" class="link-navegacion">Portafolio</a>
+            <a href="#sobre-mi" class="link-navegacion">Sobre Mi</a>
+            <a href="#contacto" class="link-navegacion">Contacto</a>
         </nav>
+
+        <div class="menu-burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
 
 
     </header>
 
 
-    <section class="bg-sup">
+    <section class="bg-sup" id="inicio">
         <div class="seccion-inicio">
             <div class="span-sup">
                 Desarrollador Web jr.
@@ -35,7 +42,7 @@
     </section>
 
 
-    <section class="portafolio">
+    <section class="portafolio" id="portafolio">
         
         <h2 class="titulo-portafolio">
             Proyectos
@@ -163,14 +170,13 @@
                 </div>
             </div>
 
+        </div>
 
 
     </section>
     
 
-    <section class="sobre-mi">
-        
-        <h3 class="titulo-sobre-mi">Sobre mi</h3>
+    <section class="sobre-mi" id="sobre-mi">
 
         <div class="contenedor-sobre-mi">
             <div class="mi-persona">
@@ -184,7 +190,7 @@
             </div>
     
             <div class="informacion-sobre-mi">
-                <h4>Un poco sobre mi</h4>
+                <h4>Sobre mi</h4>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil impedit dolores magni sit reprehenderit culpa autem. Assumenda dicta quia architecto consectetur iusto consequuntur sequi veritatis. Dolor ducimus nulla exercitationem error, cupiditate eveniet beatae quis itaque in facilis, deleniti, natus iusto. Fuga adipisci, ad atque est explicabo culpa quas unde repellat?</p>
     
                 <h4>Tecnologias aprendidas</h4>
@@ -238,7 +244,7 @@
 
 
 
-    <section class="contacto">
+    <section class="contacto" id="contacto">
 
         
         <div class="message">
@@ -260,18 +266,14 @@
 
             <input type="submit" value="Enviar">
 
-        </form>
-        
-
-        
-
-        
+        </form>        
         
 
     </section>
 
+    
 
-
+    <a href="#inicio" class="boton-volver-arriba"><img src="../img/flecha-arriba.svg" alt="Icono flecha arriba"></a>
 
 </body>
 </html>
