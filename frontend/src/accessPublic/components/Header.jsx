@@ -12,6 +12,10 @@ export const Header = () => {
                     </div>
                 </a>
 
+                <div className="menu-icon">
+                    <div className="icon"></div>
+                </div>
+
                 <nav className="navegacion">
                     <a href="#" className="navegacion__link">Inicio</a>
                     <a href="#" className="navegacion__link">Sobre Mi</a>
@@ -22,7 +26,7 @@ export const Header = () => {
 
             <div className="header-content">
                 <h1 className="header-content__title">Frontend Developer</h1>
-                <p className="header-content__paragraph">Codifico soluciones simples y efectivas a tus problemas, me encanta lo que hago.</p>
+                <p className="header-content__paragraph">Codifico soluciones de calidad y efectivas a tus problemas, me encantaria ayudarte.</p>
             </div>
 
             <div className="header-footer">
