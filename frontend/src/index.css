@@ -4,6 +4,17 @@
 
 
 
+/* Utilidades */
+.alerta {
+    @apply block font-medium;
+}
+
+.error {
+    @apply text-red-500;
+}
+
+
+
 /* Header Section */
 
 
@@ -282,4 +293,76 @@
 
 .footer .copyright {
     @apply text-white text-center text-lg font-semibold;
+}
+
+/*------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------*/
+
+/* Page Not Found */
+.page-not-found {
+    @apply w-screen h-screen flex items-center justify-center bg-slate-100;
+}
+
+.page-not-found__container {
+    @apply h-80 flex flex-col gap-5 text-center p-3;
+}
+
+.page-not-found__container h1 {
+    @apply text-4xl text-red-600 font-bold;
+}
+
+.page-not-found__container p {
+    @apply text-xl text-slate-600 font-medium;
+}
+
+.page-not-found__boton-inicio {
+    @apply border border-blue-400 rounded text-blue-500 text-lg font-medium hover:border-0 hover:bg-blue-500 hover:text-white w-fit mx-auto p-3 transition-colors duration-300;
+}
+
+/*------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------*/
+
+/* Form Login & Forgot Password */
+.formulario {
+    @apply w-screen h-screen;
+}
+
+.formulario-bg {
+    @apply w-full h-full bg-indigo-50 flex items-center justify-center;
+}
+
+.formulario__form {
+    @apply bg-white rounded p-10 flex flex-col gap-10 shadow-lg;
+    width: 20rem;
+    height: max-content;
+}
+
+.formulario__form h2 {
+    @apply text-2xl text-indigo-600 text-center uppercase font-semibold;
+}
+
+.formulario__form form {
+    @apply flex flex-col gap-y-5;
+}
+
+.formulario__form-campo {
+    @apply flex flex-col mx-auto gap-2;
+}
+
+.formulario__form-campo label {
+    @apply text-indigo-600 font-medium;
+}
+
+.formulario__form-campo input {
+    @apply w-full h-8 p-2 border-b-2 outline-none focus:border-b-indigo-400;
+}
+
+.formulario__form a {
+    @apply text-indigo-600 hover:text-indigo-700 text-center;
+}
+
+.formulario__form input[type='submit'] {
+    @apply w-fit text-base text-indigo-500 font-medium border border-indigo-500 rounded hover:cursor-pointer hover:bg-indigo-500 hover:text-white p-3 transition-colors duration-150 mt-3 mx-auto;
 }

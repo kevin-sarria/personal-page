@@ -4,7 +4,9 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Sarria\\Backend\\": "src/"
+            "MVC\\": "src/",
+            "Model\\": "model/",
+            "Controllers\\": "controller/"
         }
     },
     "authors": [

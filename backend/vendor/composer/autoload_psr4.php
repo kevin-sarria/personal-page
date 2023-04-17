@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Sarria\\Backend\\' => array($baseDir . '/src'),
+    'Model\\' => array($baseDir . '/model'),
+    'MVC\\' => array($baseDir . '/src'),
+    'Controllers\\' => array($baseDir . '/controller'),
 );

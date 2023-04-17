@@ -1,5 +1,7 @@
 <?php
 
-    echo 'Hola mundo';
+    require_once "config/app.php";
+
+    
 
 ?>
