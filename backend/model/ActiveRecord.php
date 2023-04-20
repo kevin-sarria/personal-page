@@ -81,6 +81,114 @@ class ActiveRecord {
         return $sanitizado;
     }
 
+    public function sincronizar($args=[]) {
+        foreach( $args as $key => $value ) {
+            if( property_exists($this, $key) && !is_null($value) ) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+    public function guardar() {
+        $resultado = '';
+        if( !is_null($this->id) ) {
+            // Atualizar
+            $resultado = $this->actualizar();
+        } else {
+            // Creando un nuevo registro
+            $resultado = $this->crear();
+        }
+        return $resultado;
+    }
+
+    // Obtener todos los registros
+    public static function all( string $orden = 'DESC' ) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id ${orden}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    public static function find( $id ) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}";
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
+    }
+
+    public static function get( $limite ) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id DESC LIMIT ${limite}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    public static function where($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift( $resultado ) ;
+    }
+
+    public static function ordenar( $columna, $orden ) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY ${columna} ${orden}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    public static function ordenarLimite( $columna, $orden, $limit ) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY ${columna} ${orden} LIMIT ${limit}" ;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    // Crea un nuevo registro
+    public function crear() {
+        // Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+
+        // Insertar en la base de datos
+        $query = " INSERT INTO " . static::$tabla . " ( ";
+        $query .= join( ', ', array_keys($atributos) );
+        $query .= " ) VALUES (' ";
+        $query .= join( "', '", array_values($atributos) );
+        $query .= " ') ";
+
+        // Resultado de la consulta
+        $resultado = self::$db->query($query);
+        return [
+            'resultado' => $resultado,
+            'id' => self::$db->insert_id
+        ];
+    }
+
+    // Actualizar el registro
+    public function actualizar() {
+
+        // Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+
+        // Iterar para ir agregando cada campo de la BD
+        $valores = [];
+        foreach( $atributos as $key => $value ) {
+            $valores[] = "{$key}='{$value}'";
+        }
+
+        // Consulta SQL
+        $query = "UPDATE " . static::$tabla . " SET " ;
+        $query .= join( ', ', $valores );
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1";
+
+        // Actualizar BD
+        $resultado = self::$db->query($query);
+        return $resultado;
+    }
+
+    // Eliminar un registro por su ID
+    public function eliminar() {
+        $query = "DELETE * FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        $resultado = self::$db->query($query);
+        return $resultado;
+    }
+
+
 }
 
 ?>
