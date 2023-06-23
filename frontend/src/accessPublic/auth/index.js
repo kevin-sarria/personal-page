@@ -1,2 +1,2 @@
-export * from './ForgotPasswordPage';
-export * from './LoginPage';
+export * from './ForgotPassword';
+export * from './login';

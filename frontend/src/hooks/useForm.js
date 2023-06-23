@@ -3,14 +3,16 @@ import { useEffect, useMemo, useState } from 'react';
 export const useForm = ( initialForm = {}, formValidations = {} ) => {
   
     const [ formState, setFormState ] = useState( initialForm );
-    const [ formValidation, setFormValidation ] = useState({});
+    const [ formValidation, setFormValidation ] = useState( {} );
 
     useEffect( () => {
         createValidators();
-    }, [formState] );
+    }, [ formState ] );
 
     useEffect( () => {
+
         setFormState( initialForm );
+
     }, [initialForm] );
 
     useEffect( () => {
@@ -32,7 +34,7 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
         const { name, value } = target;
         setFormState({
             ...formState,
-            [name]: value
+            [ name ]: value
         });
     }
 
@@ -47,7 +49,7 @@ export const useForm = ( initialForm = {}, formValidations = {} ) => {
         for (const formField of Object.keys( formValidations ) ) {
             const [ fn, errorMessage = 'Este campo es requerido' ] = formValidations[formField];
 
-            formCheckedValues[`${formField}Valid`] = fn( formValidations[formField]) ? null : errorMessage;
+            formCheckedValues[`${formField}Valid`] = fn( formState[formField]) ? null : errorMessage;
         }
 
         setFormValidation( formCheckedValues );

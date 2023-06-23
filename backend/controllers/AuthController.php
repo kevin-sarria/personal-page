@@ -34,15 +34,21 @@ class AuthController {
                         $jwt = new Tokens( $usuario->id, $usuario->email, $usuario->type_user );
                         $new_token = $jwt->crearToken();
 
-                        echo json_encode([ 
-                            "id" => $usuario->id,
-                            "nombres" => $usuario->nombres,
-                            "apellidos" => $usuario->apellidos,
-                            "email" => $usuario->email,
-                            "type_user" => $usuario->type_user,
-                            "Token" => $new_token
-                        ]);
-                        return;
+                        if( $new_token ) {
+                            echo json_encode([ 
+                                "id" => $usuario->id,
+                                "nombres" => $usuario->nombres,
+                                "apellidos" => $usuario->apellidos,
+                                "email" => $usuario->email,
+                                "type_user" => $usuario->type_user,
+                                "Token" => $new_token
+                            ]);
+                            return;
+                        }
+                    } else {
+                        Usuario::setAlerta('error', 'Correo o contraseña incorrectos.');
+                        $alertas = Usuario::getAlertas();
+                        echo json_encode($alertas, JSON_UNESCAPED_UNICODE);
                     }
                 }
             }
@@ -86,18 +92,6 @@ class AuthController {
             }
 
         }
-    }
-
-
-    public static function validarToken() {
-
-        if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-
-            $token = new Tokens('', '', '');
-            $token->validarToken();
-
-        }
-
     }
 
 

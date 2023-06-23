@@ -3,6 +3,7 @@
 require_once "config/app.php";
 
 
+use Classes\Tokens;
 use MVC\Router;
 use Controllers\AuthController;
 
@@ -12,8 +13,8 @@ $router = new Router();
 $router->post('/', [AuthController::class, 'validarUsuario']);
 $router->post('/crear-admin', [AuthController::class, 'crearAdmin']);
 
-// Pruebas
-$router->post('/validar-token', [AuthController::class, 'validarToken']);
+// Tokens
+$router->get('/revalidar-token', [Tokens::class, 'reValidarToken']);
 
 $router->comprobarRutas();
 
