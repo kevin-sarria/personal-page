@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { UseFetch, useForm } from '../../../hooks';
+import { useFormik } from 'formik';
 
 const initialState = {
   email: '',
@@ -8,23 +8,19 @@ const initialState = {
 
 export const LoginPage = () => {
 
-  const { email, password, onInputChange, onResetForm } = useForm(initialState);
+  const { email, password, onInputChange, resetForm, handleSubmit } = useFormik({
+    initialValues: {
+      initialState
+    },
+    onSubmit: async() => {
 
-  const data = { email, password };
+      const respuesta = await login();
 
-  const { login } = UseFetch(data);
+      resetForm();
+      
+    }
+  });
 
-  const handleSubmit = async(e) => {
-
-    e.preventDefault();
-
-    const respuesta = await login();
-
-    console.log(respuesta);
-
-    onResetForm();
-
-  };
 
   return (
     <main className="formulario">

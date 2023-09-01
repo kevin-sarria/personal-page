@@ -23,7 +23,7 @@ export const UseFetch = ({ data = {} }) => {
     }
 
   return {
-    login,
+    login
   }
 
 }

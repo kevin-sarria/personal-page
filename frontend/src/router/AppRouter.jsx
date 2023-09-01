@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { ForgotPasswordPage, HomePage, Login, PageNotFound } from "../accessPublic";
+import { ForgotPasswordPage, HomePage, Login, PageNotFound } from "../pages";
 
-export const Router = () => {
+const authenticated = 'not-authenticated';
 
-  const authenticated = 'not-authenticated';
+export const AppRouter = () => {
 
   return (
     <Routes>
