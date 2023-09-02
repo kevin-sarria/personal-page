@@ -2,10 +2,10 @@ import axios from "axios";
 import { getEnvVariables } from '../helpers';
 import { localSpace } from "./localSpace";
 
-const { VITE_API_URL } = getEnvVariables();
+const { VITE_BACKEND_URL } = getEnvVariables();
 
 export const configApi = axios.create({
-    baseURL: VITE_API_URL
+    baseURL: VITE_BACKEND_URL
 });
 
 // Se configuran los interceptores en axios para que se puedan enviar datos como el token
