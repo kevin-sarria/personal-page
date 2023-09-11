@@ -1,4 +1,4 @@
-import { AccessPrivateTemplate, DashboardPage } from "../pages"
+import { AccessPrivateTemplate, DashboardPage, ProjectsPage } from "../pages"
 
 
 export const routesAdmin = [
@@ -7,4 +7,9 @@ export const routesAdmin = [
         Template: AccessPrivateTemplate,
         Component: DashboardPage
     },
+    {
+        path: '/projects',
+        Template: AccessPrivateTemplate,
+        Component: ProjectsPage
+    }
 ]

@@ -6,14 +6,14 @@ export const Sidebar = () => {
 
       <div className="sidebar__container">
 
-      <div className="sidebar__user">
-        <img src="" alt="Imagen usuario" />
-        <hr />
-      </div>
+        <div className="sidebar__icon">
+          <p>{'<SarriaDev />'}</p>
+        </div>
 
       <div className="sidebar__links">
-        <a href="#">Inicio</a>
-        <a href="#">Proyectos</a>
+        <a href="/dashboard">Inicio</a>
+        <a href="/projects">Proyectos</a>
+        <a href="/config">Configuracion</a>
       </div>
 
       <div className="sidebar__options">
