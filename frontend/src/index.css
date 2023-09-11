@@ -5,6 +5,10 @@
 
 
 /* Utilidades */
+body {
+    @apply w-screen h-screen;
+}
+
 .alerta {
     @apply block font-medium;
 }
@@ -16,8 +20,6 @@
 
 
 /* Header Section */
-
-
 .header-public {
     @apply min-h-screen mt-5 lg:w-4/5 mx-auto;
 }
@@ -366,3 +368,45 @@
 .formulario__form input[type='submit'] {
     @apply w-fit text-base text-indigo-500 font-medium border border-indigo-500 rounded hover:cursor-pointer hover:bg-indigo-500 hover:text-white p-3 transition-colors duration-150 mt-3 mx-auto;
 }
+
+/* --------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+/* Access Private */
+.accessPrivate {
+    @apply flex gap-x-1;
+}
+
+.sidebar {
+    @apply h-screen w-2/5 xl:w-1/5 p-5 flex flex-col ;
+}
+
+.sidebar__container {
+    @apply h-full flex flex-col gap-y-10 justify-evenly;
+}
+
+.sidebar__links {
+    @apply p-3;
+}
+
+.sidebar__links a {
+    @apply block text-center text-lg ;
+}
+
+.sidebar__options {
+    @apply flex justify-between;
+}
+
+.sidebar__options .option {
+    @apply w-10 h-10 p-1 rounded cursor-pointer bg-indigo-700 hover:bg-indigo-600;
+}
+
+.sidebar__options .option img {
+    @apply invert;
+}
+
+.main-content {
+    @apply h-screen w-full overflow-y-auto overflow-x-hidden;
+}
+
