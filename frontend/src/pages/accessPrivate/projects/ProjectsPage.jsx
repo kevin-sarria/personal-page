@@ -1,7 +1,9 @@
-
+import { Table } from "./components"
 
 export const ProjectsPage = () => {
   return (
-    <div>ProjectsPage</div>
+    <>
+      <Table />
+    </>
   )
 }

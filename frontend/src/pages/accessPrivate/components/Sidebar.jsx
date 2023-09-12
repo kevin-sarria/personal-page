@@ -1,13 +1,9 @@
-export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen( prev => !prev );    
-  }
+export const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
   return (
     <aside className={ isSidebarOpen ? 'sidebar sidebar--open' : 'sidebar sidebar--close' }>
       <div className="close__menu">
-        <button onClick={setIsSidebarOpen}>X</button>
+        <button onClick={toggleSidebar}>X</button>
       </div>
 
       <div className="sidebar__container">

@@ -379,7 +379,15 @@ body {
 }
 
 .sidebar {
-    @apply fixed h-screen w-full xl:w-1/5 flex flex-col border-r border-gray-300 bg-white;
+    @apply fixed h-screen w-full xl:w-1/5 flex flex-col border-r border-gray-300 bg-white z-10;
+}
+
+.sidebar--open {
+    @apply translate-x-0 transition-transform duration-500;
+}
+
+.sidebar--close {
+    @apply -translate-x-full transition-transform duration-500;
 }
 
 .sidebar__container {
@@ -419,6 +427,48 @@ body {
 }
 
 .main-content {
-    @apply h-screen w-full overflow-y-auto overflow-x-hidden;
+    @apply h-screen w-full overflow-y-auto overflow-x-hidden p-10;
 }
 
+.main-content__section {
+    @apply my-10 w-full overflow-x-auto;
+}
+
+/* Table */
+.table {
+    @apply w-full mx-auto;
+}
+
+.table__thead {
+    @apply bg-indigo-500 text-white;
+}
+
+.table__thead tr th {
+    @apply p-3 text-center border;
+}
+
+.table__tbody {
+    @apply h-full;
+}
+
+.table__tbody tr td {
+    @apply max-h-96 max-w-xs text-center;
+}
+
+.table__tbody .table__image {
+    @apply w-32 h-32 bg-cover;
+}
+
+.table__tbody .options {
+    @apply flex w-full justify-between;
+}
+
+.table__tbody .options a {
+    @apply w-fit;
+}
+
+.table__options img,
+.table__github--img img,
+.table__web--img img {
+    @apply w-10 h-10;
+}
