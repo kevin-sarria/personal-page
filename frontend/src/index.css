@@ -17,7 +17,17 @@ body {
     @apply text-red-500;
 }
 
+.addRecord {
+    @apply absolute bottom-10 right-14;
+}
 
+.addRecord__container {
+    @apply w-16 h-16 bg-indigo-600 rounded-full p-5 flex items-center justify-center hover:bg-indigo-500 cursor-pointer;
+}
+
+.addRecord__container span {
+    @apply text-2xl text-white font-bold;
+}
 
 /* Header Section */
 .header-public {
@@ -436,15 +446,15 @@ body {
 
 /* Table */
 .table {
-    @apply w-full mx-auto;
+    @apply min-w-max w-full mx-auto border border-indigo-700;
 }
 
 .table__thead {
-    @apply bg-indigo-500 text-white;
+    @apply bg-indigo-500 text-white font-semibold uppercase text-lg;
 }
 
 .table__thead tr th {
-    @apply p-3 text-center border;
+    @apply p-5 text-center;
 }
 
 .table__tbody {
@@ -452,23 +462,28 @@ body {
 }
 
 .table__tbody tr td {
-    @apply max-h-96 max-w-xs text-center;
+    @apply max-h-96 max-w-xs text-center p-1;
+}
+
+.table__tbody tr {
+    @apply border border-indigo-700 even:bg-indigo-50;
 }
 
 .table__tbody .table__image {
     @apply w-32 h-32 bg-cover;
 }
 
-.table__tbody .options {
-    @apply flex w-full justify-between;
+.table__options {
+    @apply w-full flex gap-x-5 justify-center;
 }
 
-.table__tbody .options a {
-    @apply w-fit;
+.table__github--img a,
+.table__web--img a {
+    @apply w-fit flex items-center justify-center mx-auto;
 }
 
 .table__options img,
 .table__github--img img,
 .table__web--img img {
-    @apply w-10 h-10;
+    @apply w-14 h-14;
 }
