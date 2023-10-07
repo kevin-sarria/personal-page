@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 export const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
   return (
@@ -12,10 +14,10 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         </div>
 
         <div className="sidebar__links">
-          <a href="/dashboard">Inicio</a>
-          <a href="/technologies">Tecnologias</a>
-          <a href="/projects">Proyectos</a>
-          <a href="/config">Configuracion</a>
+          <NavLink onClick={toggleSidebar} to="/dashboard">Inicio</NavLink>
+          <NavLink onClick={toggleSidebar} to="/technologies">Tecnologias</NavLink>
+          <NavLink onClick={toggleSidebar} to="/projects">Proyectos</NavLink>
+          <NavLink onClick={toggleSidebar} to="/config">Configuracion</NavLink>
         </div>
 
         <div className="sidebar__options">

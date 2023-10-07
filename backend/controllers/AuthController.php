@@ -83,7 +83,7 @@ class AuthController {
                     $email = new Email($admin->email, $admin->nombres . " " . $admin->apellidos, $admin->token);
                     $emailEnviado = $email->registrarUsuario();
 
-                    echo json_encode(["msg" => $emailEnviado, "success" => "true"]);
+                    echo json_encode(["msg" => $emailEnviado, "type" => "success"]);
 
                 }
 
@@ -94,6 +94,27 @@ class AuthController {
         }
     }
 
+    public static function reValidarToken() {
+
+        $admin = new Usuario;
+
+        if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+
+            $admin->sincronizar($_POST);
+
+            if (!$admin->id || !$admin->email || !$admin->type_user) {
+                echo json_encode(["Error" => "Ha ocurrido un error en el sistema, por favor contacta con el soporte."]);
+                return;
+            }
+
+            $token = Tokens::reValidarToken($admin->id, $admin->email, $admin->type_user);
+
+            echo json_encode(["msg" => "Token Revalidado Correctamente", "type" => "success", "token" => $token]);
+
+
+        }
+
+    }
 
 }
 

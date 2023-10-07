@@ -1,4 +1,7 @@
 <?php
+
+define( 'IMAGES_FOLDER' , $_SERVER['DOCUMENT_ROOT'] . '/img/');
+
 use Dotenv\Dotenv;
 use Model\ActiveRecord;
 

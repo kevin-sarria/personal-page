@@ -3,9 +3,9 @@
 require_once "config/app.php";
 
 
-use Classes\Tokens;
 use MVC\Router;
 use Controllers\AuthController;
+use Controllers\TecnologiasController;
 
 $router = new Router();
 
@@ -23,10 +23,14 @@ header("Content-Type: application/json");
 
 // Inicio de sesion y creacion de cuentas
 $router->post('/login', [AuthController::class, 'validarUsuario']);
-$router->post('/crear-admin', [AuthController::class, 'crearAdmin']);
+// $router->post('/crear-admin', [AuthController::class, 'crearAdmin']);
 
 // Tokens
-$router->get('/revalidar-token', [Tokens::class, 'reValidarToken']);
+$router->post('/revalidar-token', [AuthController::class, 'reValidarToken']);
+
+// Tecnologias
+$router->get('/technologies', [TecnologiasController::class, 'index']);
+$router->post('/register-technologies', [TecnologiasController::class, 'register']);
 
 $router->comprobarRutas();
 

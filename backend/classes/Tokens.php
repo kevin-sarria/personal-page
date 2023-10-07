@@ -26,13 +26,13 @@ class Tokens
         $now = strtotime('now');
 
         if (!$this->id_user || !$this->email_user || !$this->type_user) {
-            echo json_encode(["Error" => "Ha ocurrido un error inesperado, ponte en contacto con el soporte tecnico."]);
+            echo json_encode(["msg" => "Ha ocurrido un error inesperado, ponte en contacto con el soporte tecnico.", "type" => "error"]);
             return false;
         }
 
         $payload = [
             'iat' => $now,
-            'exp' => $now + 130,
+            'exp' => $now + 7200,
             'id_user' => $this->id_user,
             'email_user' => $this->email_user,
             'type_user' => $this->type_user
@@ -60,45 +60,32 @@ class Tokens
 
     }
 
-    public static function reValidarToken()
+    public static function reValidarToken( $id = '', $email = '', $type_user = '' )
     {
 
         $jwt = self::returnJWT();
         $key = $_ENV['SECRET_PASS'];
 
-        $id_user = $jwt['id_user'] ?? '';
-        $email_user = $jwt['email_user'] ?? '';
-        $type_user = $jwt['type_user'] ?? '';
-
-        $usuario = new Usuario;
-
-        $existeUsuario = $usuario->where('email', $email_user);
-
-
-        if (!$id_user || !$email_user || !$type_user) {
-            echo json_encode(["Error" => "Ha ocurrido un error en el sistema, por favor contacta con el soporte."]);
-            return;
+        if (!$id || !$email || !$type_user) {
+            return false;
         }
 
-        if (!$jwt) {
-            echo json_encode(["Error" => "Token no Válido"], JSON_UNESCAPED_UNICODE);
-            return;
-        }
-        ;
+        $usuario = new Usuario([ "id" => $id, "email" => $email, "type_user" => $type_user]);
+
+        $existeUsuario = $usuario->where('email', $usuario->email);
 
         if ($existeUsuario) {
             try {
                 JWT::decode($jwt, new Key($key, 'HS256'));
-                $newToken = new Tokens($id_user, $email_user, $type_user);
+                $newToken = new Tokens($usuario->id, $usuario->email, $usuario->type_user);
                 $token = $newToken->crearToken();
-                echo json_encode(["newToken" => $token]);
-                return;
+                return $token;
             } catch (\Throwable $th) {
-                echo json_encode(["Error" => "El Token ha expirado"]);
-                return false;
+                echo json_encode(["msg" => "El Token ha expirado", "type" => "error"]);
+                exit;
             }
         } else {
-            echo json_encode(["Error" => "Ha ocurrido un error en el sistema, por favor contacta con el soporte."]);
+            echo json_encode(["msg" => "Ha ocurrido un error en el sistema, por favor contacta con el soporte.", "type" => "error"]);
             return;
         }
 
@@ -112,8 +99,8 @@ class Tokens
         $jwt = $jwt[1] ?? '';
 
         if (!$jwt) {
-            echo json_encode(["Error" => "Token no Válido"], JSON_UNESCAPED_UNICODE);
-            return;
+            echo json_encode(["msg" => "Token no Válido", "type" => "error"], JSON_UNESCAPED_UNICODE);
+            exit;
         };
 
         return $jwt;

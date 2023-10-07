@@ -11,5 +11,15 @@ export const routesAdmin = [
         path: '/projects',
         Template: AccessPrivateTemplate,
         Component: ProjectsPage
+    },
+    {
+        path: '/technologies',
+        Template: AccessPrivateTemplate,
+        Component: ProjectsPage
+    },
+    {
+        path: '/configuration',
+        Template: AccessPrivateTemplate,
+        Component: ProjectsPage
     }
 ]
