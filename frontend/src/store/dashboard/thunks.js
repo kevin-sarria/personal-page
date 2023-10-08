@@ -1,5 +1,5 @@
-import { getUser } from "../../../interceptors";
-import { login } from "./dashboardSlice";
+import { getUser } from '../../interceptors';
+import { closeSession, login } from "./dashboardSlice";
 
 export const startingLogin = (dataInput = {}) => {
     return async(dispatch) => {
@@ -8,11 +8,31 @@ export const startingLogin = (dataInput = {}) => {
 
         try {
             const user = await getUser(dataInput);
-            const stateGlobal = { ...user };
-            return dispatch(login(stateGlobal));
+            return dispatch(login(user));
         } catch (error) {
             console.log(error);
         }
 
+    }
+}
+
+export const closingSession = () => {
+    return async( dispatch ) => {
+        dispatch(closeSession());
+    }
+}
+
+export const validatingSession = () => {
+    return async( dispatch ) => {
+        
+        try {
+            // Ask user info to save in global state with redux
+            const user = await getUser();
+
+            dispatch(login(user));
+
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 }

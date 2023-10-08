@@ -30,7 +30,9 @@ $router->post('/revalidar-token', [AuthController::class, 'reValidarToken']);
 
 // Tecnologias
 $router->get('/technologies', [TecnologiasController::class, 'index']);
-$router->post('/register-technologies', [TecnologiasController::class, 'register']);
+$router->post('/register-technology', [TecnologiasController::class, 'register']);
+$router->post('/update-technology', [TecnologiasController::class, 'update']);
+$router->post('/delete-technology', [TecnologiasController::class, 'delete']);
 
 $router->comprobarRutas();
 

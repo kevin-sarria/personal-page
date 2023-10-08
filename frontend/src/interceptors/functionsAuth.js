@@ -1,4 +1,4 @@
-import { authSessionAdapter } from "../src/pages/accessPublic/auth/";
+import { authSessionAdapter } from "../pages/accessPublic/auth/";
 import { callApi } from "./callApi"
 import { localSpace } from "./localSpace";
 

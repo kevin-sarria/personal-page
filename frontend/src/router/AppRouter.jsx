@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { HomePage, PageNotFound } from "../pages";
-import { routesPublic, routesAdmin } from "./";
 
-const authenticated = 'authenticated';
+import { routesPublic, routesAdmin } from "./";
+import { HomePage, PageNotFound } from "../pages";
+import { useCheckAuth } from "../hooks";
 
 export const AppRouter = () => {
+
+  const authenticated = useCheckAuth();
 
   return (
     <Routes>

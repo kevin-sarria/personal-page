@@ -15,7 +15,6 @@ export const LoginPage = () => {
     onSubmit: async() => {
 
       dispatch(startingLogin(values));
-      
       resetForm();
       
     }
