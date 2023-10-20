@@ -22,7 +22,20 @@ export const getUser = async(dataInput = {}) => {
 
 
     } catch (error) {
-        console.log(error);
+        return error?.response?.data;
+    }
+
+}
+
+export const renewUser = async() => {
+
+    try {
+        const query = await callApi.get('/auth/me');
+        const { data } = query;
+        const dataFormatted = authSessionAdapter(data);
+        return dataFormatted;
+    } catch (error) {
+        return error?.response?.data;
     }
 
 }

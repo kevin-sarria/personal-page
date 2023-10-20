@@ -6,25 +6,22 @@ use Classes\Images;
 use Classes\Tokens;
 use Model\Tecnologia;
 
-class TecnologiasController {
+class TechnologyController {
 
     public static function index() {
-        
-        $alertas = [];
+
         $token = new Tokens;
         $tecnologia = new Tecnologia;
 
         if( $token->validarToken() ) {
-            
             $tecnologia = $tecnologia->all('ASC');
             http_response_code(200);
             echo json_encode($tecnologia);
-
+            return;
         } else {
-            $tecnologia->setAlerta('error', 'Token Expirado o no Valido');
-            $alertas = $tecnologia::getAlertas();
             http_response_code(403);
-            echo json_encode($alertas);
+            echo json_encode(["msg" => "Token Expirado o no Valido", "type" => "error"]);
+            return;
         }
         
 
@@ -32,21 +29,39 @@ class TecnologiasController {
 
     public static function register() {
 
-        $alertas = [];
         $token = new Tokens;
         $tecnologia = new Tecnologia;
 
         if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
             if( !$token->validarToken() ) {
-                $tecnologia->setAlerta('error', 'Token Expirado o no Valido');
-                $alertas = $tecnologia::getAlertas();
                 http_response_code(403);
-                echo json_encode($alertas);
+                echo json_encode(["msg" => "Token Expirado o no Valido", "type" => "error"]);
                 return;
             }
 
             $tecnologia->sincronizar($_POST);
+
+            if( !$_FILES ) {
+
+                $alertas = $tecnologia->validarCampos();
+
+                if( !$alertas ) {
+                    http_response_code(400);
+                    echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
+                    return;
+                }
+
+                $resultado = $tecnologia->guardar();
+
+                if( $resultado ) {
+                    $new_technology = $tecnologia::find($resultado['id']);
+                    http_response_code(200);
+                    echo json_encode($new_technology);
+                    return;
+                }
+            }
+
             $imagen = new Images($_FILES['imagen']);
 
             $isValidImage = $imagen->validImage();
@@ -59,7 +74,7 @@ class TecnologiasController {
 
             $alertas = $tecnologia->validarCampos();
 
-            if( !empty($alertas) ) {
+            if( !$alertas ) {
                 http_response_code(400);
                 echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                 return;
@@ -73,7 +88,8 @@ class TecnologiasController {
             if( $resultado ) {
                 $new_technology = $tecnologia::find($resultado['id']);
                 http_response_code(200);
-                echo json_encode(["data" => $new_technology]);
+                echo json_encode($new_technology);
+                return;
             }
 
         }
@@ -82,17 +98,14 @@ class TecnologiasController {
 
     public static function update() {
 
-        $alertas = [];
         $token = new Tokens;
         $tecnologia = new Tecnologia;
 
         if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
             if( !$token->validarToken() ) {
-                $tecnologia->setAlerta('error', 'Token Expirado o no Valido');
-                $alertas = $tecnologia::getAlertas();
                 http_response_code(403);
-                echo json_encode($alertas);
+                echo json_encode(["msg" => "Token expirado o no valido", "type" => "error"]);
                 return;
             }
 
@@ -103,16 +116,14 @@ class TecnologiasController {
                 $find_technology = $tecnologia->find($tecnologia->id);
 
                 if(!$find_technology) {
-                    $tecnologia->setAlerta('error', 'Tecnologia no encontrada');
-                    $alertas = $tecnologia::getAlertas();
                     http_response_code(400);
-                    echo json_encode($alertas);
+                    echo json_encode(["msg" => "Tecnologia no encontrada", "type" => "error"]);
                     return;
                 }
     
                 $alertas = $tecnologia->validarCampos();
 
-                if( !empty($alertas) ) {
+                if( !$alertas ) {
                     http_response_code(400);
                     echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                     return;
@@ -123,7 +134,7 @@ class TecnologiasController {
     
                 if( $resultado ) {
                     http_response_code(200);
-                    echo json_encode(["msg" => "Actualizado correctamente", "type" => "success", "data" => $tecnologia]);
+                    echo json_encode($tecnologia);
                 }
     
 
@@ -158,7 +169,7 @@ class TecnologiasController {
 
             $alertas = $tecnologia->validarCampos();
 
-            if( !empty($alertas) ) {
+            if( !$alertas ) {
                 http_response_code(400);
                 echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                 return;
@@ -174,7 +185,7 @@ class TecnologiasController {
 
             if( $resultado ) {
                 http_response_code(200);
-                echo json_encode(["msg" => "Actualizado correctamente", "type" => "success", "data" => $tecnologia]);
+                echo json_encode($tecnologia);
             }
 
         }
@@ -183,7 +194,6 @@ class TecnologiasController {
 
     public static function delete() {
 
-        $alertas = [];
         $token = new Tokens;
         $tecnologia = new Tecnologia;
         $imagen = new Images;
@@ -191,10 +201,8 @@ class TecnologiasController {
         if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
             if( !$token->validarToken() ) {
-                $tecnologia->setAlerta('error', 'Token Expirado o no Valido');
-                $alertas = $tecnologia::getAlertas();
                 http_response_code(403);
-                echo json_encode($alertas);
+                echo json_encode(["msg" => "Token Expirado o no Valido", "type" => "error"]);
                 return;
             }
 
@@ -203,10 +211,8 @@ class TecnologiasController {
             $find_technology = $tecnologia->find($tecnologia->id);
 
             if(!$find_technology) {
-                $tecnologia->setAlerta('error', 'Tecnologia no encontrada');
-                $alertas = $tecnologia::getAlertas();
                 http_response_code(400);
-                echo json_encode($alertas);
+                echo json_encode(["msg" => "Tecnologia no encontrada", "type" => "error"]);
                 return;
             }
 

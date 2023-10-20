@@ -4,23 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { closingSession, validatingSession } from "../store";
 import { localSpace } from "../interceptors";
 
+const token = localSpace.get('token') ?? null;
+
 export const useCheckAuth = () => {
 
-    const { status } = useSelector( state => state.auth );
-    const dispatch = useDispatch();
+  const { status } = useSelector( state => state.auth );
+  const dispatch = useDispatch();
 
-    const token = localSpace.get('token') ?? null;
+  useEffect( () => {
 
-    useEffect( () => {
+    if( !token ) {
+      dispatch(closingSession());
+      return;
+    };
 
-      if( !token ) {
-        dispatch(closingSession());
-        return;
-      };
+    dispatch(validatingSession());
 
-      dispatch(validatingSession());
-
-    }, [] );
+  }, [] );
 
   return status;
 }

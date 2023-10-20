@@ -14,10 +14,8 @@ class Tecnologia extends ActiveRecord {
 
     public function validarCampos() {
         if( !$this->nombre ) {
-            self::$alertas['error'][] = "El Nombre es Obligatorio.";
+            return false;   
         }
-
-        return self::$alertas;
 
     }
 
