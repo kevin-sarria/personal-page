@@ -31,6 +31,21 @@ export const useModal = () => {
       openCloseModal();
     }
 
+    const addProject = () => {
+      setContentModal(<AddTechnologyForm />);
+      openCloseModal();
+    }
+
+    const editProject = (data, dataOld) => {
+      setContentModal(<EditTechnologyForm data={data} dataOld={dataOld} />);
+      openCloseModal();
+    }
+
+    const deleteProject = (data, dataOld) => {
+      setContentModal(<DeleteTechnologyForm data={data} dataOld={dataOld} />);
+      openCloseModal();
+    }
+
   return {
     // Variables
     contentModal,
@@ -41,5 +56,8 @@ export const useModal = () => {
     addTechnology,
     editTechnology,
     deleteTechnology,
+    addProject,
+    editProject,
+    deleteProject,
   }
 }

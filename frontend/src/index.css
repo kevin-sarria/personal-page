@@ -573,7 +573,9 @@ body {
     @apply w-full flex gap-x-14 justify-center;
 }
 
-.table__options svg {
+.table__options svg,
+.table__github--img svg,
+.table__web--img svg {
     @apply w-8 h-8 text-gray-600 hover:text-indigo-700;
 }
 
@@ -582,9 +584,7 @@ body {
     @apply w-fit flex items-center justify-center mx-auto;
 }
 
-.table__options img,
-.table__github--img img,
-.table__web--img img {
+.table__options img {
     @apply w-14 h-14;
 }
 

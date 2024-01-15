@@ -39,6 +39,7 @@ $router->post('/delete-technology', [TechnologyController::class, 'delete']);
 // Proyectos
 $router->get('/projects', [ProjectsController::class, 'index']);
 $router->post('/register-project', [ProjectsController::class, 'register']);
+$router->post('/update-project', [ProjectsController::class, 'update']);
 
 $router->comprobarRutas();
 

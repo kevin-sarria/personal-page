@@ -1,5 +1,5 @@
 import { loading, loadData, haveNotification, haveNotNotification, loadNewData, setNewData, deleteData } from "./dashboardSlice";
-import { editTechnology, saveTechnology, searchTechnologies } from "../../interceptors";
+import { editTechnology, saveTechnology, searchProjects, searchTechnologies } from "../../interceptors";
 
 export const searchingTechnologies = () => {
     return async(dispatch) => {
@@ -108,5 +108,28 @@ export const deletingTechnology = ( dataInput = {}, dataOld ) => {
             console.error(error);
         }
 
+    }
+}
+
+export const searchingProjects = () => {
+    return async(dispatch) => {
+
+        dispatch(loading());
+
+        try {
+
+            const query = await searchProjects();
+            if( !query ) {
+                dispatch(haveNotification(query));
+                setTimeout( () => {
+                    dispatch(haveNotNotification());
+                }, 1000 )
+            }
+
+            return dispatch(loadData(query));
+    
+        } catch(error) {
+            console.log(error);
+        }
     }
 }

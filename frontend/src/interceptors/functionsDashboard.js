@@ -1,4 +1,5 @@
 import { technologiesAdapter } from "../pages";
+import { projectAdapter } from "../pages/accessPrivate/projects/adapters/projectsAdapter";
 import { callApi } from "./callApi";
 
 
@@ -54,4 +55,19 @@ export const editTechnology = async( idTechnology ) => {
     } catch(error) {
         return error?.response?.data;
     }
+}
+
+export const searchProjects = async() => {
+
+    try {
+        
+        const query = await callApi.get('/projects');
+        const { data } = query;
+        const dataFormatted = projectAdapter(data);
+        return dataFormatted;
+
+    } catch (error) {
+        return error?.response?.data;
+    }
+
 }
