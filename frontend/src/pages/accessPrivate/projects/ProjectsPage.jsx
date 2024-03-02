@@ -39,7 +39,7 @@ export const ProjectsPage = () => {
       <projectsContext.Provider value={modal}>
         <Modal isModalOpen={isModalOpen} contentModal={contentModal} openCloseModal={openCloseModal} />
         <Table data={data} />
-        <AddRecord />
+        <AddRecord addProject={addProject} />
       </projectsContext.Provider>
     </div>
   )

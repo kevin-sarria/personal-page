@@ -1,5 +1,5 @@
 import { loading, loadData, haveNotification, haveNotNotification, loadNewData, setNewData, deleteData } from "./dashboardSlice";
-import { editTechnology, saveTechnology, searchProjects, searchTechnologies } from "../../interceptors";
+import { deleteProject, deleteTechnology, editProject, editTechnology, saveProject, saveTechnology, searchProjects, searchTechnologies } from "../../interceptors";
 
 export const searchingTechnologies = () => {
     return async(dispatch) => {
@@ -29,23 +29,17 @@ export const savingNewTechnology = ( dataInput = {} ) => {
 
         dispatch(loading());
 
-        try {
+        const query = await saveTechnology(dataInput);
 
-            const query = await saveTechnology(dataInput);
-
-            if( !query ) {
-                console.log(query);
-                dispatch(haveNotification(query));
-                setTimeout( () => {
-                    dispatch(haveNotNotification());
-                }, 1000 )
-            }
-
-            return dispatch(loadNewData(query));
-
-        } catch(error) {
-            console.error(error);
+        if( query?.type === 'error' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+            return null;
         }
+
+        return dispatch(loadNewData(query));
 
     }
 }
@@ -55,27 +49,21 @@ export const editingTechnology = ( dataInput = {}, dataOld ) => {
 
         dispatch(loading());
 
-        try {
+        const query = await editTechnology(dataInput);
 
-            const query = await editTechnology(dataInput);
-
-            if( !query ) {
-                dispatch(haveNotification(query));
-                setTimeout( () => {
-                    dispatch(haveNotNotification());
-                }, 1000 )
-            }
-
-            let dataFormatted = dataOld.filter( obj => obj.id !== dataInput?.id );
-
-            dataFormatted = [ query, ...dataFormatted ]
-
-            return dispatch(setNewData(dataFormatted));
-
-        } catch(error) {
-            console.error(error);
+        if( query?.type === 'error' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+            return;
         }
 
+        let dataFormatted = dataOld.filter( obj => obj.id !== dataInput?.id );
+
+        dataFormatted = [ query, ...dataFormatted ]
+
+        return dispatch(setNewData(dataFormatted));
     }
 }
 
@@ -84,30 +72,24 @@ export const deletingTechnology = ( dataInput = {}, dataOld ) => {
 
         dispatch(loading());
 
-        try {
+        const query = await deleteTechnology(dataInput?.id);
 
-            const query = await editTechnology(dataInput?.id);
-
-            if( !query ) {
-                dispatch(haveNotification(query));
-                setTimeout( () => {
-                    dispatch(haveNotNotification());
-                }, 1000 )
-            }
-
+        if( query?.type === 'error' ) {
             dispatch(haveNotification(query));
             setTimeout( () => {
                 dispatch(haveNotNotification());
-            }, 1000 );
-
-            const dataFormatted = dataOld.filter( obj => obj.id !== dataInput?.id );
-
-            return dispatch(deleteData(dataFormatted));
-
-        } catch(error) {
-            console.error(error);
+            }, 1000 )
+            return;
+        } else if( query?.type === 'success' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
         }
+        
+        const dataFormatted = dataOld.filter( obj => obj.id !== dataInput?.id );
 
+        return dispatch(deleteData(dataFormatted));
     }
 }
 
@@ -131,5 +113,95 @@ export const searchingProjects = () => {
         } catch(error) {
             console.log(error);
         }
+    }
+}
+
+export const savingNewProject = ( dataInput = {} ) => {
+    return async(dispatch) => {
+
+        dispatch(loading());
+
+        const query = await saveProject(dataInput);
+
+        if( query?.type === 'error' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+            return null;
+        }
+
+        return dispatch(loadNewData(query));
+
+    }
+}
+
+export const editingProject = ( dataInput = {}, dataOld ) => {
+    return async(dispatch) => {
+
+        dispatch(loading());
+
+        const query = await editProject(dataInput);
+
+        if( query?.type === 'error' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+            return;
+        }
+
+        let dataFormatted = dataOld.filter( obj => obj.id !== dataInput?.id );
+
+        dataFormatted = [ query, ...dataFormatted ];
+
+        return dispatch(setNewData(dataFormatted));
+    }
+}
+
+export const deletingProject = ( dataInput = {}, dataOld ) => {
+    return async(dispatch) => {
+
+        dispatch(loading());
+
+        const query = await deleteProject(dataInput?.id);
+
+        if( query?.type === 'error' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+            return;
+        } else if( query?.type === 'success' ) {
+            dispatch(haveNotification(query));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+        }
+        
+        const dataFormatted = dataOld.filter( obj => obj.id !== dataInput?.id );
+
+        return dispatch(deleteData(dataFormatted));
+    }
+}
+
+export const searchAllProjectsAndAllTechnologies = () => {
+    return async(dispatch) => {
+
+        dispatch(loading());
+
+        const allTechnologies = await searchTechnologies();
+        const allProjects = await searchProjects();
+
+        if( allTechnologies?.type === 'error' || allProjects?.type ==='error' ) {
+            dispatch(haveNotification(allTechnologies || allProjects));
+            setTimeout( () => {
+                dispatch(haveNotNotification());
+            }, 1000 )
+            return;
+        }
+
+        return dispatch(loadData({ allTechnologies, allProjects }));
+
     }
 }

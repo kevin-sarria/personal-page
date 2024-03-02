@@ -5,7 +5,7 @@ namespace Model;
 class Proyecto extends ActiveRecord {
 
     protected static $tabla = 'projects';
-    protected static $columnasDB = [ 'id', 'nombre', 'descripcion', 'imagen', 'repositorio', 'web', 'tecnologias' ];
+    protected static $columnasDB = [ 'id', 'nombre', 'descripcion', 'imagen', 'repositorio', 'web' ];
 
     public function __construct($args = []) {
         
@@ -15,24 +15,21 @@ class Proyecto extends ActiveRecord {
         $this->imagen = $args['imagen'] ?? "";
         $this->repositorio = $args['repositorio'] ?? "";
         $this->web = $args['web'] ?? "";
-        $this->tecnologias = $args['tecnologias'] ?? "";
+        $this->id_tecnologia = $args['id_tecnologia'] ?? "";
+        $this->nombre_tecnologia = $args['nombre_tecnologia'] ?? "";
+        $this->imagen_tecnologia = $args['imagen_tecnologia'] ?? "";
     }
 
+    // Si el campo esta vacio, devuelte true haciendo referencia a que el campo esta vacio, osea que no pasa la validacion
     public function validarCampos() {
 
-        if( !$this->nombre ) {
-            return false;
+        if( empty($this->nombre) ) {
+            return true;
         }
 
-        if( !$this->descripcion ) {
-            return false;
+        if( empty($this->descripcion) ) {
+            return true;
         }
-
-        if( !$this->tecnologias ) {
-            return false;
-        }
-
-        return true;
 
     }
 

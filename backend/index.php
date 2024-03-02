@@ -6,6 +6,7 @@ require_once "config/app.php";
 use MVC\Router;
 use Controllers\AuthController;
 use Controllers\ProjectsController;
+use Controllers\PruebasController;
 use Controllers\TechnologyController;
 
 $router = new Router();
@@ -40,6 +41,7 @@ $router->post('/delete-technology', [TechnologyController::class, 'delete']);
 $router->get('/projects', [ProjectsController::class, 'index']);
 $router->post('/register-project', [ProjectsController::class, 'register']);
 $router->post('/update-project', [ProjectsController::class, 'update']);
+$router->post('/delete-project', [ProjectsController::class, 'delete']);
 
 $router->comprobarRutas();
 

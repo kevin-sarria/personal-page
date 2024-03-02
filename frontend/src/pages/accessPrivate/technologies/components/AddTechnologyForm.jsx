@@ -4,7 +4,7 @@ import { technologiesContext } from "../context";
 import { savingNewTechnology } from "../../../../store";
 
 import { useFormik } from "formik";
-import { UploadImageField } from "./UploadImageField";
+import { UploadImageField } from "../../components";
 
 export const AddTechnologyForm = () => {
 

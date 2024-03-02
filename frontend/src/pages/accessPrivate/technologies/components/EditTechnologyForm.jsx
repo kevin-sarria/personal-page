@@ -5,7 +5,7 @@ import { editingTechnology } from "../../../../store";
 import { imageUtils } from "../../../../helpers";
 
 import { useFormik } from "formik";
-import { UploadImageField } from "./UploadImageField";
+import { UploadImageField } from "../../components";
 
 export const EditTechnologyForm = ({ data, dataOld }) => {
 

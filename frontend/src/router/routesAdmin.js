@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { AccessPrivateTemplate, DashboardPage, ProjectsPage, TechnologiesPage } from "../pages";
+import { AccessPrivateTemplate } from "../pages";
 
 
 const Dashboard = lazy( () => import('../pages/accessPrivate/dashboard/DashboardPage') );

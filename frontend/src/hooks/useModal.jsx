@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AddTechnologyForm, DeleteTechnologyForm, EditTechnologyForm } from "../pages";
+import { AddProjectForm, AddTechnologyForm, DeleteProjectForm, DeleteTechnologyForm, EditProjectForm, EditTechnologyForm } from "../pages";
 
 export const useModal = () => {
 
@@ -32,17 +32,17 @@ export const useModal = () => {
     }
 
     const addProject = () => {
-      setContentModal(<AddTechnologyForm />);
+      setContentModal(<AddProjectForm />);
       openCloseModal();
     }
 
     const editProject = (data, dataOld) => {
-      setContentModal(<EditTechnologyForm data={data} dataOld={dataOld} />);
+      setContentModal(<EditProjectForm data={data} dataOld={dataOld} />);
       openCloseModal();
     }
 
     const deleteProject = (data, dataOld) => {
-      setContentModal(<DeleteTechnologyForm data={data} dataOld={dataOld} />);
+      setContentModal(<DeleteProjectForm data={data} dataOld={dataOld} />);
       openCloseModal();
     }
 

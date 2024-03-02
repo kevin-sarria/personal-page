@@ -10,19 +10,12 @@ class TechnologyController {
 
     public static function index() {
 
-        $token = new Tokens;
         $tecnologia = new Tecnologia;
 
-        if( $token->validarToken() ) {
-            $tecnologia = $tecnologia->all('ASC');
-            http_response_code(200);
-            echo json_encode($tecnologia);
-            return;
-        } else {
-            http_response_code(403);
-            echo json_encode(["msg" => "Token Expirado o no Valido", "type" => "error"]);
-            return;
-        }
+        $tecnologia = $tecnologia->all('ASC');
+        http_response_code(200);
+        echo json_encode($tecnologia);
+        return;
         
 
     }
@@ -44,9 +37,9 @@ class TechnologyController {
 
             if( !$_FILES ) {
 
-                $alertas = $tecnologia->validarCampos();
+                $validaciones = $tecnologia->validarCampos();
 
-                if( !$alertas ) {
+                if( $validaciones ) {
                     http_response_code(400);
                     echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                     return;
@@ -72,9 +65,9 @@ class TechnologyController {
                 return;
             }
 
-            $alertas = $tecnologia->validarCampos();
+            $validaciones = $tecnologia->validarCampos();
 
-            if( !$alertas ) {
+            if( $validaciones ) {
                 http_response_code(400);
                 echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                 return;
@@ -121,9 +114,9 @@ class TechnologyController {
                     return;
                 }
     
-                $alertas = $tecnologia->validarCampos();
+                $validaciones = $tecnologia->validarCampos();
 
-                if( !$alertas ) {
+                if( $validaciones ) {
                     http_response_code(400);
                     echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                     return;
@@ -167,9 +160,9 @@ class TechnologyController {
                 return;
             }
 
-            $alertas = $tecnologia->validarCampos();
+            $validaciones = $tecnologia->validarCampos();
 
-            if( !$alertas ) {
+            if( $validaciones ) {
                 http_response_code(400);
                 echo json_encode(["msg" => "Los campos no pueden ir Vacios", "type" => "error"]);
                 return;

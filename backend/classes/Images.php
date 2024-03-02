@@ -37,6 +37,15 @@ class Images {
         return empty($this->tmp_name);
     }
 
+    private function haveImgDirectory() {
+
+        // Verificar que exista el directorio de img, si no existe crearlo
+        if( !is_dir(IMAGES_FOLDER) ) {
+            mkdir(IMAGES_FOLDER);
+        }
+
+    }
+
     public function uploadTechnologyIcon() {
 
         // Instanciar el archivo y recortarlo
@@ -46,6 +55,8 @@ class Images {
         $upload_path = IMAGES_FOLDER . 'technology/' . $name_image;
 
         // verificar si hay una carpeta para subir las imagenes, si no hay, crearla
+        $this->haveImgDirectory();
+
         if( !is_dir(IMAGES_FOLDER . 'technology') ) {
             mkdir( IMAGES_FOLDER . 'technology');
         }
@@ -65,6 +76,8 @@ class Images {
         $upload_path = IMAGES_FOLDER . 'project/' . $name_image;
 
         // verificar si hay una carpeta para subir las imagenes, si no hay, crearla
+        $this->haveImgDirectory();
+        
         if( !is_dir(IMAGES_FOLDER . 'project') ) {
             mkdir( IMAGES_FOLDER . 'project');
         }
