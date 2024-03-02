@@ -1,25 +1,31 @@
-import { AccessPrivateTemplate, DashboardPage, ProjectsPage } from "../pages"
+import { lazy } from "react";
+import { AccessPrivateTemplate } from "../pages";
 
+
+const Dashboard = lazy( () => import('../pages/accessPrivate/dashboard/DashboardPage') );
+const Projects = lazy( () => import('../pages/accessPrivate/projects/ProjectsPage') );
+const Technologies = lazy( () => import('../pages/accessPrivate/technologies/TechnologiesPage') );
+const Configuration = lazy( () => import('../pages/accessPrivate/dashboard/DashboardPage') );
 
 export const routesAdmin = [
     {
         path: '/dashboard',
         Template: AccessPrivateTemplate,
-        Component: DashboardPage
+        Component: Dashboard
     },
     {
         path: '/projects',
         Template: AccessPrivateTemplate,
-        Component: ProjectsPage
+        Component: Projects
     },
     {
         path: '/technologies',
         Template: AccessPrivateTemplate,
-        Component: ProjectsPage
+        Component: Technologies
     },
     {
         path: '/configuration',
         Template: AccessPrivateTemplate,
-        Component: ProjectsPage
+        Component: Configuration
     }
 ]

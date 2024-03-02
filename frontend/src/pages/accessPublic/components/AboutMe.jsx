@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getEnvVariables } from "../../../helpers";
 
 
 export const AboutMe = () => {
+
+  const [ technologies, setTechnologies ] = useState();
+
+  const { VITE_BACKEND_URL } = getEnvVariables();
+
+  const { data } = useSelector( state => state.dashboard );
+
+  useEffect( () => {
+    if( data?.allTechnologies ) {
+      setTechnologies(data?.allTechnologies);
+    }
+  }, [data] );
+
   return (
     <main className="about-me">
 
@@ -21,50 +37,14 @@ export const AboutMe = () => {
 
           <div className="about-me__technologies--technologie">
 
-            <div className="technologie">
-              <img src="/img/icons/html.svg" alt="Icono Html" />
-              <p>HTML</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/css.svg" alt="Icono CSS" />
-              <p>CSS</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/sass.svg" alt="Icono SASS" />
-              <p>SASS</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/tailwindcss.svg" alt="Icono TailwindCSS" />
-              <p>TailwindCSS</p>
-            </div>
-            
-            <div className="technologie">
-              <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-              <p>JavaScript</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/react.svg" alt="Icono React" />
-              <p>React</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/php.svg" alt="Icono PHP" />
-              <p>PHP</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/mysql.svg" alt="Icono MySQL" />
-              <p>MySQL</p>
-            </div>
-
-            <div className="technologie">
-              <img src="/img/icons/git.svg" alt="Icono Git" />
-              <p>Git</p>
-            </div>
+            {
+              technologies && technologies.map( ( { id, nombre, imagen }, index ) => (
+                <div className="technologie" key={index}>
+                  <img src={`${VITE_BACKEND_URL}${imagen}`} alt={`Icono ${nombre}`} />
+                  <p>{nombre}</p>
+                </div>
+              ) )
+            }
 
           </div>
         </div>

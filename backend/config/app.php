@@ -1,5 +1,6 @@
 <?php
 
+define( 'BASE_FOLDER' , $_SERVER['DOCUMENT_ROOT']);
 define( 'IMAGES_FOLDER' , $_SERVER['DOCUMENT_ROOT'] . '/img/');
 
 use Dotenv\Dotenv;
