@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Sidebar } from "./components"
-
+import { IconMenu, Sidebar } from "./components"
+import { Alert } from "../../components";
 
 export const AccessPrivateTemplate = ({children}) => {
 
@@ -12,9 +12,10 @@ export const AccessPrivateTemplate = ({children}) => {
 
   return (
     <div className="accessPrivate">
+      <Alert type='dashboard' />
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <main className="main-content">
-        <button onClick={toggleSidebar}>abrir menu</button>
+        <IconMenu toggleSidebar={toggleSidebar} />
         <div className="main-content__section">
           {children}
         </div>

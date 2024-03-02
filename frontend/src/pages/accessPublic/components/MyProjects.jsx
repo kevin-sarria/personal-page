@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react"
+import { getEnvVariables } from "../../../helpers"
+import { useSelector } from "react-redux"
 
 const addOverlay = (e) => {
     e.target.parentElement.classList.add('overlay-active')
@@ -8,6 +11,19 @@ const removeOverlay = (e) => {
 }
 
 export const MyProjects = () => {
+
+    const [ projects, setProjects ] = useState();
+
+    const { VITE_BACKEND_URL } = getEnvVariables();
+
+    const { data } = useSelector( state => state.dashboard );
+
+    useEffect( () => {
+        if( data?.allProjects ) {
+          setProjects(data?.allProjects);
+        }
+      }, [data] );
+
     return (
         <section className="my-projects">
 
@@ -16,208 +32,38 @@ export const MyProjects = () => {
                 <h2 className="my-projects__heading">Mis Proyectos</h2>
 
                 <div className="my-projects__flex">
-                    <div className="my-projects__project"> { /* open .my-projects__project */}
-                        <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
-                            <img src="/img/dashboard.webp" alt="Imagen del proyecto" />
-                            <div className="buttons">
-                                <a href="#"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
-                                <a href="#"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
+                    {
+                        projects && projects.map( ({ nombre, descripcion, imagen, repositorio, web, tecnologias }, index) => (
+                            <div className="my-projects__project" key={index}>
+                                <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
+                                    <img src={`${VITE_BACKEND_URL}${imagen}`} alt="Imagen del proyecto" />
+                                    <div className="buttons">
+                                        <a href={`${web}`} target="_blank"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
+                                        <a href={`${repositorio}`} target="_blank"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
+                                    </div>
+                                </div>
+
+                                <div className="my-projects__project--content">
+                                    <h4>{nombre}</h4>
+                                    <p>{descripcion}</p>
+
+                                    <h4>Tecnologias</h4>
+
+                                    <div className="my-projects__project--content-technologies">
+                                        {
+                                            tecnologias && tecnologias.map( ({ nombre_tecnologia, imagen_tecnologia }, index) => (
+                                                <div className="technologie" key={index}>
+                                                    <img src={`${VITE_BACKEND_URL}${imagen_tecnologia}`} alt={`Icono ${nombre_tecnologia}`} />
+                                                    <p>{nombre_tecnologia}</p>
+                                                </div>
+                                            ) )
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="my-projects__project--content">
-                            <h4>Project Veterinary</h4>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam hic quis accusamus dolorum reprehenderit nihil alias, distinctio fuga dicta dolore.</p>
-                            <div className="my-projects__project--content-technologies">
-
-                                <div className="technologie">
-                                    <img src="/img/icons/html.svg" alt="Icono HTML" />
-                                    <p>HTML</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/css.svg" alt="Icono CSS" />
-                                    <p>CSS</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-                                    <p>Javascript</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> { /* close .my-projects__project */}
-
-
-                    <div className="my-projects__project"> { /* open .my-projects__project */}
-                        <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
-                            <img src="/img/dashboard.webp" alt="Imagen del proyecto" />
-                            <div className="buttons">
-                                <a href="#"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
-                                <a href="#"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
-                            </div>
-                        </div>
-
-                        <div className="my-projects__project--content">
-                            <h4>Project Veterinary</h4>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam hic quis accusamus dolorum reprehenderit nihil alias, distinctio fuga dicta dolore.</p>
-                            <div className="my-projects__project--content-technologies">
-
-                                <div className="technologie">
-                                    <img src="/img/icons/html.svg" alt="Icono HTML" />
-                                    <p>HTML</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/css.svg" alt="Icono CSS" />
-                                    <p>CSS</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-                                    <p>Javascript</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> { /* close .my-projects__project */}
-
-
-                    <div className="my-projects__project"> { /* open .my-projects__project */}
-                        <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
-                            <img src="/img/dashboard.webp" alt="Imagen del proyecto" />
-                            <div className="buttons">
-                                <a href="#"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
-                                <a href="#"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
-                            </div>
-                        </div>
-
-                        <div className="my-projects__project--content">
-                            <h4>Project Veterinary</h4>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam hic quis accusamus dolorum reprehenderit nihil alias, distinctio fuga dicta dolore.</p>
-                            <div className="my-projects__project--content-technologies">
-
-                                <div className="technologie">
-                                    <img src="/img/icons/html.svg" alt="Icono HTML" />
-                                    <p>HTML</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/css.svg" alt="Icono CSS" />
-                                    <p>CSS</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-                                    <p>Javascript</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> { /* close .my-projects__project */}
-
-
-                    <div className="my-projects__project"> { /* open .my-projects__project */}
-                        <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
-                            <img src="/img/dashboard.webp" alt="Imagen del proyecto" />
-                            <div className="buttons">
-                                <a href="#"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
-                                <a href="#"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
-                            </div>
-                        </div>
-
-                        <div className="my-projects__project--content">
-                            <h4>Project Veterinary</h4>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam hic quis accusamus dolorum reprehenderit nihil alias, distinctio fuga dicta dolore.</p>
-                            <div className="my-projects__project--content-technologies">
-
-                                <div className="technologie">
-                                    <img src="/img/icons/html.svg" alt="Icono HTML" />
-                                    <p>HTML</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/css.svg" alt="Icono CSS" />
-                                    <p>CSS</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-                                    <p>Javascript</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> { /* close .my-projects__project */}
-
-
-                    <div className="my-projects__project"> { /* open .my-projects__project */}
-                        <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
-                            <img src="/img/dashboard.webp" alt="Imagen del proyecto" />
-                            <div className="buttons">
-                                <a href="#"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
-                                <a href="#"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
-                            </div>
-                        </div>
-
-                        <div className="my-projects__project--content">
-                            <h4>Project Veterinary</h4>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam hic quis accusamus dolorum reprehenderit nihil alias, distinctio fuga dicta dolore.</p>
-                            <div className="my-projects__project--content-technologies">
-
-                                <div className="technologie">
-                                    <img src="/img/icons/html.svg" alt="Icono HTML" />
-                                    <p>HTML</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/css.svg" alt="Icono CSS" />
-                                    <p>CSS</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-                                    <p>Javascript</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> { /* close .my-projects__project */}
-
-
-                    <div className="my-projects__project"> { /* open .my-projects__project */}
-                        <div className="my-projects__project--overlay" onMouseEnter={(e) => addOverlay(e)} onMouseLeave={(e) => removeOverlay(e)}>
-                            <img src="/img/dashboard.webp" alt="Imagen del proyecto" />
-                            <div className="buttons">
-                                <a href="#"><img src="/img/icons/web.png" alt="Icono web" />Web</a>
-                                <a href="#"><img src="/img/icons/github.svg" alt="Icono Github" />Github</a>
-                            </div>
-                        </div>
-
-                        <div className="my-projects__project--content">
-                            <h4>Project Veterinary</h4>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam hic quis accusamus dolorum reprehenderit nihil alias, distinctio fuga dicta dolore.</p>
-                            <div className="my-projects__project--content-technologies">
-
-                                <div className="technologie">
-                                    <img src="/img/icons/html.svg" alt="Icono HTML" />
-                                    <p>HTML</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/css.svg" alt="Icono CSS" />
-                                    <p>CSS</p>
-                                </div>
-
-                                <div className="technologie">
-                                    <img src="/img/icons/javascript.svg" alt="Icono JavaScript" />
-                                    <p>Javascript</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> { /* close .my-projects__project */}
+                        ) )
+                    }
+                    
                 </div>
 
 

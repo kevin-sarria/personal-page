@@ -12,8 +12,6 @@ class AuthController {
 
     public static function validarUsuario() {
 
-        $alertas = [];
-
         $usuario = new Usuario($_POST);
 
         if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
@@ -23,9 +21,8 @@ class AuthController {
             if( empty($alertas) ) {
                 $usuario = Usuario::where('email', $usuario->email);
                 if( !$usuario || $usuario->banned || !$usuario->confirmado ) {
-                    Usuario::setAlerta('error', 'El usuario no existe, no esta confirmado o esta baneado');
-                    $alertas = Usuario::getAlertas();
-                    echo json_encode($alertas);
+                    http_response_code(401);
+                    echo json_encode([ "msg" => "El usuario no existe, no esta confirmado o esta baneado" , "type" => "error" ]);
                     return;
                 } else {
                     // Verificar que la contraseña sea correcta
@@ -46,13 +43,53 @@ class AuthController {
                             return;
                         }
                     } else {
-                        Usuario::setAlerta('error', 'Correo o contraseña incorrectos.');
-                        $alertas = Usuario::getAlertas();
-                        echo json_encode($alertas, JSON_UNESCAPED_UNICODE);
+                        http_response_code(401);
+                        echo json_encode([ "msg" => "Email o password incorrectos" , "type" => "error" ]);
+                        return;
                     }
                 }
             }
         }
+    }
+
+    public static function userInfo() {
+
+        $token = new Tokens;
+        $usuario = new Usuario;
+
+        $tokenValid = $token->validarToken();
+
+        if( !$tokenValid ) {
+            http_response_code(403);
+            echo json_encode([ "msg" => "Token no valido" , "type" => "error" ]);
+            return;
+        }
+
+        $resp = $token->desencriptarToken();
+
+        if( !$resp ) {
+            http_response_code(400);
+            echo json_encode([ "msg" => "Estamos teniendo problemas para procesar su peticion, por favor contacte al soporte" , "type" => "error" ]);
+            return;
+        }
+
+        $userFind = $usuario->find($resp->id_user);
+
+        if( !$userFind ) {
+            http_response_code(400);
+            echo json_encode([ "msg" => "Usuario no encontrado" , "type" => "error" ]);
+            return;
+        }
+
+        http_response_code(200);
+        echo json_encode([ 
+            "id" => $userFind->id,
+            "nombres" => $userFind->nombres,
+            "apellidos" => $userFind->apellidos,
+            "email" => $userFind->email,
+            "type_user" => $userFind->type_user
+        ]);
+
     }
 
     public static function crearAdmin() {
@@ -69,9 +106,7 @@ class AuthController {
                 $user_exist = Usuario::where('email', $admin->email);
 
                 if( $user_exist ) {
-                    Usuario::setAlerta("error", "El usuario ya existe");
-                    $alertas = Usuario::getAlertas();
-                    echo json_encode($alertas);
+                    echo json_encode(["msg" => "El usuario ya existe", "type" => "error"]);
                     return;
                 } else {
                     $admin->type_user = 1;
@@ -103,7 +138,7 @@ class AuthController {
             $admin->sincronizar($_POST);
 
             if (!$admin->id || !$admin->email || !$admin->type_user) {
-                echo json_encode(["Error" => "Ha ocurrido un error en el sistema, por favor contacta con el soporte."]);
+                echo json_encode(["msg" => "Ha ocurrido un error en el sistema, por favor contacta con el soporte.", "type" => "error"]);
                 return;
             }
 

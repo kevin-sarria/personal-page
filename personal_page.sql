@@ -13,22 +13,22 @@ SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Base de datos: `personal_page`
---
 
--- --------------------------------------------------------
+-- Volcando estructura de base de datos para personal_page
+CREATE DATABASE IF NOT EXISTS `personal_page` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `personal_page`;
 
---
--- Estructura de tabla para la tabla `projects`
---
-
-CREATE TABLE `projects` (
-  `id` int(3) NOT NULL,
+-- Volcando estructura para tabla personal_page.projects
+CREATE TABLE IF NOT EXISTS `projects` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
   `descripcion` text NOT NULL,
   `imagen` text DEFAULT NULL,
@@ -58,7 +58,22 @@ INSERT INTO `projects` (`id`, `nombre`, `descripcion`, `imagen`, `repositorio`, 
 CREATE TABLE `technologies` (
   `id` int(3) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `imagen` text NOT NULL
+  `imagen` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla personal_page.technologies_projects
+CREATE TABLE IF NOT EXISTS `technologies_projects` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `id_project` int(3) NOT NULL,
+  `id_technology` int(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_project` (`id_project`),
+  KEY `id_technology` (`id_technology`),
+  CONSTRAINT `technologies_projects_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES `projects` (`id`),
+  CONSTRAINT `technologies_projects_ibfk_2` FOREIGN KEY (`id_technology`) REFERENCES `technologies` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -150,8 +165,9 @@ CREATE TABLE `users` (
   `type_user` int(1) NOT NULL,
   `banned` int(1) NOT NULL,
   `token` varchar(60) DEFAULT NULL,
-  `confirmado` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `confirmado` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -231,5 +247,4 @@ ALTER TABLE `technologies_projects`
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

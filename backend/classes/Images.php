@@ -25,8 +25,8 @@ class Images {
 
     public function validImage() {
 
-        if( $this->type !== 'image/jpg' && $this->type !== 'image/png' && $this->type !== 'image/webp' && $this->type !== 'image/avif' || !$this->type ) {
-            return false;    
+        if( $this->type !== 'image/jpg' && $this->type !== 'image/jpeg' && $this->type !== 'image/png' && $this->type !== 'image/webp' && $this->type !== 'image/avif' || !$this->type ) {
+            return false;
         }
 
         return true;
@@ -35,6 +35,15 @@ class Images {
 
     public function isEmptyImage() {
         return empty($this->tmp_name);
+    }
+
+    private function haveImgDirectory() {
+
+        // Verificar que exista el directorio de img, si no existe crearlo
+        if( !is_dir(IMAGES_FOLDER) ) {
+            mkdir(IMAGES_FOLDER);
+        }
+
     }
 
     public function uploadTechnologyIcon() {
@@ -46,6 +55,8 @@ class Images {
         $upload_path = IMAGES_FOLDER . 'technology/' . $name_image;
 
         // verificar si hay una carpeta para subir las imagenes, si no hay, crearla
+        $this->haveImgDirectory();
+
         if( !is_dir(IMAGES_FOLDER . 'technology') ) {
             mkdir( IMAGES_FOLDER . 'technology');
         }
@@ -53,6 +64,27 @@ class Images {
         $imagen->save($upload_path, 90, 'png');
 
         $this->path = '/img/technology/' . $name_image;
+
+    }
+
+    public function uploadProject() {
+
+        // Instanciar el archivo y recortarlo
+        $imagen = Image::make($this->tmp_name)->resize(1280, 720);
+        // Generar un nombre para la imagen
+        $name_image = md5(uniqid(rand())) . '.png';
+        $upload_path = IMAGES_FOLDER . 'project/' . $name_image;
+
+        // verificar si hay una carpeta para subir las imagenes, si no hay, crearla
+        $this->haveImgDirectory();
+        
+        if( !is_dir(IMAGES_FOLDER . 'project') ) {
+            mkdir( IMAGES_FOLDER . 'project');
+        }
+
+        $imagen->save($upload_path, 90, 'png');
+
+        $this->path = '/img/project/' . $name_image;
 
     }
 
