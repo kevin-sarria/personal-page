@@ -1,1 +1,1 @@
-export * from './TechnologiesAdapter';
+export * from './technologiesAdapter';
