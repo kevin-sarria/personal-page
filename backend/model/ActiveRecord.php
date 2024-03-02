@@ -138,6 +138,24 @@ class ActiveRecord {
         return $resultado;
     }
 
+    public static function listarProyectos() {
+        $query = "SELECT projects.id, projects.nombre, projects.descripcion, projects.imagen, projects.repositorio, projects.web, technologies.id as id_tecnologia, technologies.nombre as nombre_tecnologia, technologies.imagen as imagen_tecnologia FROM technologies_projects INNER JOIN projects ON projects.id = technologies_projects.id_project INNER JOIN technologies ON technologies.id = technologies_projects.id_technology;";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    /**
+     * Esta funcion es utilizada solo para buscar los proyectos
+     * y tecnologias de un proyecto en especifico mediante su id
+     * 
+     * @param string $id id del proyecto
+     */
+    public static function buscarProyecto( $id ) {
+        $query = "SELECT projects.id, projects.nombre, projects.descripcion, projects.imagen, projects.repositorio, projects.web, technologies.id as id_tecnologia, technologies.nombre as nombre_tecnologia, technologies.imagen as imagen_tecnologia FROM technologies_projects INNER JOIN projects ON projects.id = technologies_projects.id_project INNER JOIN technologies ON technologies.id = technologies_projects.id_technology WHERE projects.id = " . $id . ";" ;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // Crea un nuevo registro
     public function crear() {
         // Sanitizar los datos
@@ -146,9 +164,9 @@ class ActiveRecord {
         // Insertar en la base de datos
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join( ', ', array_keys($atributos) );
-        $query .= " ) VALUES (' ";
+        $query .= " ) VALUES ('";
         $query .= join( "', '", array_values($atributos) );
-        $query .= " ') ";
+        $query .= "')";
 
         // Resultado de la consulta
         $resultado = self::$db->query($query);
@@ -184,6 +202,13 @@ class ActiveRecord {
     // Eliminar un registro por su ID
     public function eliminar() {
         $query = "DELETE FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        $resultado = self::$db->query($query);
+        return $resultado;
+    }
+
+    // Eliminar un dato de la tabla Proyecto Tecnologia
+    public function eliminarProyectoTecnologia( $id_project, $id_technology ) {
+        $query = "DELETE FROM " . static::$tabla . " WHERE id_project = " . $id_project . " AND id_technology = " . $id_technology . " LIMIT 1";
         $resultado = self::$db->query($query);
         return $resultado;
     }

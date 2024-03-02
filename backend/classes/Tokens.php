@@ -5,6 +5,7 @@ namespace Classes;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Model\Usuario;
+use stdClass;
 
 class Tokens
 {
@@ -58,6 +59,19 @@ class Tokens
         }
 
 
+    }
+
+    public function desencriptarToken() {
+        
+        $jwt = self::returnJWT();
+        $key = $_ENV['SECRET_PASS'];
+
+        try {
+            $decoded = JWT::decode($jwt, new key($key, 'HS256'));
+            return $decoded;
+        } catch(\Throwable $th) {
+            return false;
+        }
     }
 
     public static function reValidarToken( $id = '', $email = '', $type_user = '' )
