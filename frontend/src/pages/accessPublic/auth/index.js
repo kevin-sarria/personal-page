@@ -1,3 +1,3 @@
 export * from './adapters';
-export * from './ForgotPassword';
+export * from './forgotPassword';
 export * from './login';
